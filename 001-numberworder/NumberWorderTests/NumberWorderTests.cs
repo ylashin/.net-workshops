@@ -7,13 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NumberWorderTests
-{
-    
+{ 
 
     [TestFixture]
     public class NumberWorderTests
-    {
-        
+    {        
         [TestCase("")]
         [TestCase("     ")]
         [TestCase(null)]
@@ -21,12 +19,12 @@ namespace NumberWorderTests
         {
             NumberWorder numberWorder = new NumberWorder();
             var ex = Assert.Catch<ArgumentException>(() => numberWorder.Parse(input));
-            StringAssert.Contains("Null or empty input to the parser", ex.Message);
+            StringAssert.Contains("Input is null or empty or whitespace", ex.Message);
         }
 
 
         [TestCase("1234567890", "ONETWOTHREEFOURFIVESIXSEVENEIGHTNINEZERO")]
-        [TestCase("321", "THREETWOONE")]
+        [TestCase("32105", "THREETWOONEZEROFIVE")]
         [TestCase("7", "SEVEN")]
         public void NumberWorder_WhenParsingValidNumericInput_ShouldReturnParsedWording(string input,string expected)
         {
@@ -36,11 +34,12 @@ namespace NumberWorderTests
         }
 
         [TestCase("a13")]
-        [TestCase("1a3")]
-        [TestCase("13a")]
-        [TestCase("1 3")]
-        [TestCase(" 1")]
+        [TestCase("1%3")]
+        [TestCase("13_")]
+        [TestCase("12 3")]
+        [TestCase(" 123")]
         [TestCase("123 ")]
+        [TestCase("-123")]
         public void NumberWorder_WhenParsingTextWithAlphaCharacters_ShouldThrowArgumentException(string input)
         {
             NumberWorder numberWorder = new NumberWorder();            
