@@ -19,7 +19,7 @@ namespace NumberWorderTests
             Program.Console = console;
             Program.Main(new string[] { });
 
-            console.Received().WriteLine("usage: NumberWorder.exe 1234");
+            console.Received().WriteLine(Program.UsageMessage);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace NumberWorderTests
             Program.Console = console;
             Program.Main(new string[] { "1234", "5678" });
 
-            console.Received().WriteLine("usage: NumberWorder.exe 1234");
+            console.Received().WriteLine(Program.UsageMessageMoreThanOneParam);
         }
 
         [Test]
@@ -64,10 +64,11 @@ namespace NumberWorderTests
             Program.Console = console;
             Program.NumberWorder = numberWorder;
             
-            Assert.Throws<Exception>(() => Program.Main(new string[] { input }));
+            Program.Main(new string[] { input });
             numberWorder.Received().Parse(input);
             console.Received().ReceivedWithAnyArgs().WriteLine(Arg.Any<string>());
-            //var pInfo = console.ReceivedCalls().ToList()[0].GetParameterInfos();
+            StringAssert.Contains(exceptionText,
+                console.ReceivedCalls().ToList()[0].GetArguments()[0].ToString());
 
         }
     }
