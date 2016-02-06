@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace NumberWorderApp
 {
-    public class NumberWorder
+    public interface INumberWorder
+    {
+        string Parse(string input);
+    }
+    public class NumberWorder : INumberWorder
     {
         private Dictionary<int,string> NumberMap { get; set; }
         public NumberWorder()
