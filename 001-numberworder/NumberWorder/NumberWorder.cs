@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace NumberWorderApp
 {
-    class Program
+    public class NumberWorder
     {
-        static void Main(string[] args)
+        public string Parse(string input)
         {
+            throw new NotImplementedException();
+        }
+        private void Test()
+        {
+
         }
     }
 }

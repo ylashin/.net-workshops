@@ -7,7 +7,7 @@
     <ProjectGuid>{FD83F07C-B383-43CF-A60A-0ED1BE64705A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NumberWorder</RootNamespace>
+    <RootNamespace>NumberWorderApp</RootNamespace>
     <AssemblyName>NumberWorder</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NumberWorder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
