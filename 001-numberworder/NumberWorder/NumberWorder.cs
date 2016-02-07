@@ -13,6 +13,9 @@ namespace NumberWorderApp
     public class NumberWorder : INumberWorder
     {
         private Dictionary<int,string> NumberMap { get; set; }
+        public const string EmptyInputMessage = "Input is null or empty or whitespace";
+        public const string NonNumericInputMessage = "Non numeric characters were found in input";
+
         public NumberWorder()
         {
             NumberMap = new Dictionary<int, string>()

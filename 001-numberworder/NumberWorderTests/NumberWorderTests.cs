@@ -19,7 +19,7 @@ namespace NumberWorderTests
         {
             NumberWorder numberWorder = new NumberWorder();
             var ex = Assert.Catch<ArgumentException>(() => numberWorder.Parse(input));
-            StringAssert.Contains("Input is null or empty or whitespace", ex.Message);
+            StringAssert.Contains(NumberWorder.EmptyInputMessage, ex.Message);
         }
 
 
@@ -44,7 +44,7 @@ namespace NumberWorderTests
         {
             NumberWorder numberWorder = new NumberWorder();            
             var ex = Assert.Catch<ArgumentException>(() => numberWorder.Parse(input));
-            StringAssert.Contains("Non numeric characters were found in input", ex.Message);
+            StringAssert.Contains(NumberWorder.NonNumericInputMessage, ex.Message);
         }
     }
 }

@@ -63,12 +63,22 @@ namespace NumberWorderTests
 
             Program.Console = console;
             Program.NumberWorder = numberWorder;
+
+            var receivedMessage = "";
+            console.WriteLine(Arg.Do<string>(x =>
+            {
+                receivedMessage = x;
+            }));
             
+            
+
             Program.Main(new string[] { input });
+
+
             numberWorder.Received().Parse(input);
-            console.Received().ReceivedWithAnyArgs().WriteLine(Arg.Any<string>());
-            StringAssert.Contains(exceptionText,
-                console.ReceivedCalls().ToList()[0].GetArguments()[0].ToString());
+            console.ReceivedWithAnyArgs().WriteLine(Arg.Any<string>());
+
+            StringAssert.Contains(exceptionText, receivedMessage);
 
         }
     }
