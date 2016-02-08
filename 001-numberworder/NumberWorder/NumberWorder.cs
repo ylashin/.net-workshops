@@ -27,21 +27,24 @@ namespace NumberWorderApp
         public string Parse(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
-                throw new ArgumentException("Input is null or empty or whitespace");
+                throw new ArgumentException(EmptyInputMessage);
 
-            StringBuilder builder = new StringBuilder();
-            
-            foreach(var c in input)
+            Validate(input);
+
+            var mappedValues = input.ToList()
+                .Select(a => NumberMap[int.Parse(a.ToString())]);
+
+            return string.Join("", mappedValues);
+
+        }
+
+        private void Validate(string input)
+        {
+            foreach (var c in input)
             {
                 if (char.IsDigit(c) == false)
-                    throw new ArgumentException("Non numeric characters were found in input");
-
-                builder.Append(NumberMap[int.Parse(c.ToString())]);
+                    throw new ArgumentException(NonNumericInputMessage);
             }
-
-            return builder.ToString();
-            
         }
-        
     }
 }
