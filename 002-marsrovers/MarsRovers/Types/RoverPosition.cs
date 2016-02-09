@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MarsRoversApp.Types
 {
-    public class RoverInput
+    public class Rover
     {
-        public RoverStartPosition RoverStartPosition { get; set; }
+        public RoverPosition StartPosition { get; set; }
         public List<MoveAction> Movements { get; set; }
 
     }

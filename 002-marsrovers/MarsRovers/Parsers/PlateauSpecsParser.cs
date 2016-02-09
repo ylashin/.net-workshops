@@ -11,8 +11,20 @@ namespace MarsRoversApp.Parsers
     {
         public static PlateauSpecs Parse(string plateauSpecsText)
         {
-            var plateauSpecs = PlateauSpecs.Build(-1,-1);
-            return plateauSpecs;
+            if (string.IsNullOrWhiteSpace(plateauSpecsText))
+                throw new ParseException(ApplicationMessages.InvalidHeaderNotTwoParts);
+
+            var parts = plateauSpecsText.Split(' ');
+            if (parts.Length!=2)
+                throw new ParseException(ApplicationMessages.InvalidHeaderNotTwoParts);
+
+            int part1,part2;
+            if (int.TryParse(parts[0],out part1) == false)
+                throw new ParseException(ApplicationMessages.InvalidHeaderNonNumberDimensions);
+            if (int.TryParse(parts[1], out part2) == false)
+                throw new ParseException(ApplicationMessages.InvalidHeaderNonNumberDimensions);
+            
+            return PlateauSpecs.Build(part1,part2);
         }
     }
 }

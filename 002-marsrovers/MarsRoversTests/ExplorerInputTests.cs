@@ -1,4 +1,5 @@
 ﻿using MarsRoversApp;
+using MarsRoversApp.Types;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,8 @@ namespace MarsRoversTests
         public void ExplorerInput_WhenParsingNoLines_ShouldThrowException()
         {
             ExplorerInput explorerInput = new ExplorerInput();
-
             var ex = Assert.Catch<ParseException>(() => explorerInput.Parse(new string[] { }));
             StringAssert.Contains(ApplicationMessages.EmptyInput, ex.Message);
-
-
         }
 
         [Test]
@@ -76,6 +74,9 @@ namespace MarsRoversTests
         [TestCase("-1 2")]
         [TestCase("-2 3")]
         [TestCase("-2 -3")]
+        [TestCase("1 0")]
+        [TestCase("0 1")]
+        [TestCase("0 0")]
         public void ExplorerInput_WhenParsingNegativeDimenstionsInHeader_ShouldThrowException(string header)
         {
             ExplorerInput explorerInput = new ExplorerInput();
@@ -154,9 +155,9 @@ namespace MarsRoversTests
 
             explorerInput.Parse(new string[] { width + " " + height, roverStartInfo, "LMLMLMLMM" });
 
-            Assert.AreEqual(explorerInput.RoverInputs[0].RoverStartPosition.StartX, expectedX);
-            Assert.AreEqual(explorerInput.RoverInputs[0].RoverStartPosition.StartY, expectedY);
-            Assert.AreEqual(explorerInput.RoverInputs[0].RoverStartPosition.StartOrientation.ToString(), expectedOrientation);
+            Assert.AreEqual(explorerInput.Rovers[0].StartPosition.X, expectedX);
+            Assert.AreEqual(explorerInput.Rovers[0].StartPosition.Y, expectedY);
+            Assert.AreEqual(explorerInput.Rovers[0].StartPosition.Orientation.ToString(), expectedOrientation);
         }
 
 

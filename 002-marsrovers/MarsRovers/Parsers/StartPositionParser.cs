@@ -9,10 +9,24 @@ namespace MarsRoversApp.Parsers
 {
     public static class StartPositionParser
     {
-        public static RoverStartPosition Parse(string startPositionInfo)
+        public static RoverPosition Parse(string startPositionInfo)
         {
+            if (string.IsNullOrWhiteSpace(startPositionInfo))
+                throw new ParseException(ApplicationMessages.InvalidRoverStartInfo);
 
-            var roverStartPosition = new RoverStartPosition();
+            var parts = startPositionInfo.Split(' ');
+            if (parts.Length != 3)
+                throw new ParseException(ApplicationMessages.InvalidRoverStartInfo);
+
+
+            int part1, part2;
+            if (int.TryParse(parts[0], out part1) == false)
+                throw new ParseException(ApplicationMessages.InvalidRoverStartInfo);
+            if (int.TryParse(parts[1], out part2) == false)
+                throw new ParseException(ApplicationMessages.InvalidRoverStartInfo);
+
+
+            var roverStartPosition = RoverPosition.Build(part1, part2, (Orientation)Enum.Parse(typeof(Orientation),parts[2]));
             return roverStartPosition;
         }
     }
