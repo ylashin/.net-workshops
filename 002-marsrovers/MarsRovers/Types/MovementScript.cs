@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarsRoversApp
+namespace MarsRoversApp.Types
 {
-    public class MarsExplorer
+    public class MovementScript
     {
-        
+        public List<MoveAction> Movements { get; set; }
     }
 }
