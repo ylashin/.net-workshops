@@ -100,12 +100,12 @@ namespace MarsRoversTests
         {
             var input = "LRMMRL";
             var script = MarsGrammar.MovementScript.Parse(input);
-            Assert.AreEqual(script.Movements[0], MoveAction.L);
-            Assert.AreEqual(script.Movements[1], MoveAction.R);
-            Assert.AreEqual(script.Movements[2], MoveAction.M);
-            Assert.AreEqual(script.Movements[3], MoveAction.M);
-            Assert.AreEqual(script.Movements[4], MoveAction.R);
-            Assert.AreEqual(script.Movements[5], MoveAction.L);
+            Assert.AreEqual(script.Movements[0], MovementAction.L);
+            Assert.AreEqual(script.Movements[1], MovementAction.R);
+            Assert.AreEqual(script.Movements[2], MovementAction.M);
+            Assert.AreEqual(script.Movements[3], MovementAction.M);
+            Assert.AreEqual(script.Movements[4], MovementAction.R);
+            Assert.AreEqual(script.Movements[5], MovementAction.L);
         }
 
         [Test]
@@ -114,18 +114,18 @@ namespace MarsRoversTests
             var input = "5 7 N\r\nLRMMRL";
             var rover = MarsGrammar.Rover.Parse(input);
             var script = rover.MovementScript;
-            var position = rover.StartPosition;
+            var position = rover.Position;
 
             Assert.AreEqual(position , new RoverPosition()
             { X = 5 , Y = 7 , Orientation = Orientation.N });
 
             Assert.AreEqual(script.Movements.Count,6);
-            Assert.AreEqual(script.Movements[0], MoveAction.L);
-            Assert.AreEqual(script.Movements[1], MoveAction.R);
-            Assert.AreEqual(script.Movements[2], MoveAction.M);
-            Assert.AreEqual(script.Movements[3], MoveAction.M);
-            Assert.AreEqual(script.Movements[4], MoveAction.R);
-            Assert.AreEqual(script.Movements[5], MoveAction.L);
+            Assert.AreEqual(script.Movements[0], MovementAction.L);
+            Assert.AreEqual(script.Movements[1], MovementAction.R);
+            Assert.AreEqual(script.Movements[2], MovementAction.M);
+            Assert.AreEqual(script.Movements[3], MovementAction.M);
+            Assert.AreEqual(script.Movements[4], MovementAction.R);
+            Assert.AreEqual(script.Movements[5], MovementAction.L);
         }
 
 
@@ -138,29 +138,29 @@ namespace MarsRoversTests
             Assert.AreEqual(rovers.Count,2);
 
             var script = rovers[0].MovementScript;
-            var position = rovers[0].StartPosition;
+            var position = rovers[0].Position;
 
             Assert.AreEqual(position, new RoverPosition()
             { X = 5, Y = 7, Orientation = Orientation.N });
 
             Assert.AreEqual(script.Movements.Count, 6);
-            Assert.AreEqual(script.Movements[0], MoveAction.L);
-            Assert.AreEqual(script.Movements[1], MoveAction.R);
-            Assert.AreEqual(script.Movements[2], MoveAction.M);
-            Assert.AreEqual(script.Movements[3], MoveAction.M);
-            Assert.AreEqual(script.Movements[4], MoveAction.R);
-            Assert.AreEqual(script.Movements[5], MoveAction.L);
+            Assert.AreEqual(script.Movements[0], MovementAction.L);
+            Assert.AreEqual(script.Movements[1], MovementAction.R);
+            Assert.AreEqual(script.Movements[2], MovementAction.M);
+            Assert.AreEqual(script.Movements[3], MovementAction.M);
+            Assert.AreEqual(script.Movements[4], MovementAction.R);
+            Assert.AreEqual(script.Movements[5], MovementAction.L);
 
             script = rovers[1].MovementScript;
-            position = rovers[1].StartPosition;
+            position = rovers[1].Position;
 
             Assert.AreEqual(position, new RoverPosition()
             { X = 1, Y = 3, Orientation = Orientation.S });
 
             Assert.AreEqual(script.Movements.Count, 3);
-            Assert.AreEqual(script.Movements[0], MoveAction.M);
-            Assert.AreEqual(script.Movements[1], MoveAction.R);
-            Assert.AreEqual(script.Movements[2], MoveAction.L);
+            Assert.AreEqual(script.Movements[0], MovementAction.M);
+            Assert.AreEqual(script.Movements[1], MovementAction.R);
+            Assert.AreEqual(script.Movements[2], MovementAction.L);
             
         }
 

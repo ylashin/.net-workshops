@@ -8,6 +8,6 @@ namespace MarsRoversApp.Types
 {
     public class MovementScript
     {
-        public List<MoveAction> Movements { get; set; }
+        public List<MovementAction> Movements { get; set; }
     }
 }

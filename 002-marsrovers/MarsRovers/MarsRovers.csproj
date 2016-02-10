@@ -46,11 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Misc\ApplicationMessages.cs" />
     <Compile Include="Parsers\MarsGrammar.cs" />
     <Compile Include="Types\Enums.cs" />
-    <Compile Include="Misc\ParseException.cs" />
     <Compile Include="Types\MovementScript.cs" />
+    <Compile Include="Types\NavigationProvider.cs" />
     <Compile Include="Types\Plateau.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

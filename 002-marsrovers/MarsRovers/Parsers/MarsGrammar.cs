@@ -16,14 +16,14 @@ namespace MarsRoversApp.Parsers
 
         public static readonly Parser<string> Letters = Parse.Letter.AtLeastOnce().Text().Token();
 
-        
 
-        public static Parser<Plateau> Plateau =           
+
+        public static Parser<Plateau> Plateau =
            from width in Number
            from height in Number
            select new Plateau()
            {
-               Width =  int.Parse(width),
+               Width = int.Parse(width),
                Height = int.Parse(height)
            };
 
@@ -44,7 +44,7 @@ namespace MarsRoversApp.Parsers
            select new MovementScript()
            {
                Movements = commands.ToArray()
-               .Select(a => (MoveAction)Enum.Parse(typeof(MoveAction), a.ToString())).ToList()
+               .Select(a => (MovementAction)Enum.Parse(typeof(MovementAction), a.ToString())).ToList()
            };
 
         public static Parser<Rover> Rover =
@@ -52,7 +52,7 @@ namespace MarsRoversApp.Parsers
            from ms in MovementScript
            select new Rover()
            {
-               StartPosition = p,
+               Position = p,
                MovementScript = ms
            };
 
@@ -63,10 +63,20 @@ namespace MarsRoversApp.Parsers
         public static Parser<MarsExplorer> MarsExplorer =
            from plateau in Plateau
            from rovers in Rovers
-           select new MarsExplorer()
-           {
-               Plateau = plateau,
-               Rovers = rovers
-           };
+           select new MarsExplorer(plateau, rovers);
+          
+
+        public static MarsExplorer TryParseExplorer(string input)
+        {
+            try
+            {
+                return MarsExplorer.Parse(input);
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
     }
 }

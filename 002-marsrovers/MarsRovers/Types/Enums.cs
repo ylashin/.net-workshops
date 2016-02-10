@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarsRoversApp.Types
 {
-    public enum MoveAction
+    public enum MovementAction
     {
         L,
         R,

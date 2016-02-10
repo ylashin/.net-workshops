@@ -8,7 +8,9 @@ namespace MarsRoversApp.Types
 {
     public class Rover
     {        
-        public RoverPosition StartPosition { get; set; }
-        public MovementScript MovementScript { get; set; } 
+        public RoverPosition Position { get; set; }
+        public MovementScript MovementScript { get; set; }
+
+        
     }
 }

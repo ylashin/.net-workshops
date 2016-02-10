@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MarsExplorerNavigationTests.cs" />
     <Compile Include="MarsExplorerTests.cs" />
     <Compile Include="MarsGrammerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
