@@ -57,7 +57,7 @@
     <Compile Include="Types\ExplorerInput.cs" />
     <Compile Include="Types\RoverStartPosition.cs" />
     <Compile Include="Parsers\StartPositionParser.cs" />
-    <Compile Include="Types\RoverPosition.cs" />
+    <Compile Include="Types\Rover.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

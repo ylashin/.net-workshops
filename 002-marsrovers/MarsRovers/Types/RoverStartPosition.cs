@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarsRoversApp.DynamicParsers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,21 @@ namespace MarsRoversApp.Types
 {
     public class RoverPosition
     {
+        [Column(0)]
         public int X { get; set; }
+        [Column(1)]
         public int Y { get; set; }
+        [Column(2)]
         public Orientation Orientation { get; set; }
 
-        private RoverPosition(int x,int y,Orientation orientation)
-        {
-            X = x;
-            Y = y;
-            Orientation = orientation;
-        }
+        
 
-        public static RoverPosition Build(int width, int height,Orientation orientation)
+        public bool Validate()
         {
-            if (width < 1 || height < 1)
-                throw new ParseException(ApplicationMessages.DimensionsShouldBePositive);
+            if (X < 1 || Y < 1)
+                return false;
 
-            return RoverPosition.Build(width, height,orientation);
+            return true;
         }
     }
 }

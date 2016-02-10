@@ -8,9 +8,9 @@ namespace MarsRoversApp.Types
 {
     public enum MoveAction
     {
-        LEFT,
-        RIGHT,
-        MOVE
+        L,
+        R,
+        M
     }
 
     public enum Orientation

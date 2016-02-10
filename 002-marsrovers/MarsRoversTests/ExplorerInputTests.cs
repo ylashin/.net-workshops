@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MarsRoversTests
 {
-    [TestFixture]
+    
     public class ExplorerInputTests
     {      
         [Test]
