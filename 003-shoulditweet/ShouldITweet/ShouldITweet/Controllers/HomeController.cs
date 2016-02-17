@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShouldITweet.Logic;
+using ShouldITweet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,23 @@ namespace ShouldITweet.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View(new Tweet() { Text = "" });
+        }
+
+        [HttpPost]
+        public ActionResult Index(Tweet tweet)
+        {
+            if (!ModelState.IsValid)
+            {   
+                return View(tweet);
+            }
+
+            var provider = new FixedVerbotenPhraseProvider();
+            var checker = new VerbotenChecker(provider);
+
+            tweet.VerbotenCheckPassed = checker.ValidateText(tweet.Text);
+
+            return View(tweet);
         }
 
         public ActionResult About()
