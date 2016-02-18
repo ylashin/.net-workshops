@@ -13,5 +13,6 @@ namespace ShouldITweet.Models
         [MaxLength(140)]
         public string Text { get; set; }
         public bool? VerbotenCheckPassed { get; set; }
+        public IList<string> Violations { get; set; }
     }
 }

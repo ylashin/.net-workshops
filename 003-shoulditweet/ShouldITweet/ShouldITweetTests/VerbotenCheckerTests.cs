@@ -22,11 +22,11 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result.IsSafeText, true);
         }
 
         [Test]        
-        public void VerbotenChecker_WhenCheckingTextWithVerbotenPhrases_ShouldReturnFalse()
+        public void VerbotenChecker_WhenCheckingTextWithVerbotenPhrases_ShouldReturnFalsePlusViolations()
         {
             var text = "This is a tweet containing verboten";
             IVerbotenPhraseProvider provider = Substitute.For<IVerbotenPhraseProvider>();
@@ -35,11 +35,13 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, false);
+            Assert.AreEqual(result.IsSafeText, false);
+            Assert.AreEqual(result.Violations.Count, 1);
+            Assert.AreEqual(result.Violations[0], "verboten");
         }
 
         [Test]
-        public void VerbotenChecker_WhenCheckingTextWithVerbotenPhraseWithDifferentCase_ShouldReturnFalse()
+        public void VerbotenChecker_WhenCheckingTextWithVerbotenPhraseWithDifferentCase_ShouldReturnFalsePlusViolations()
         {
             var text = "This is a tweet containing verboten";
             IVerbotenPhraseProvider provider = Substitute.For<IVerbotenPhraseProvider>();
@@ -48,11 +50,13 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, false);
+            Assert.AreEqual(result.IsSafeText, false);
+            Assert.AreEqual(result.Violations.Count, 1);
+            Assert.AreEqual(result.Violations[0], "Verboten");
         }
 
         [Test]
-        public void VerbotenChecker_WhenCheckingTextWithMultipleVerbotenPhrases_ShouldReturnFalse()
+        public void VerbotenChecker_WhenCheckingTextWithMultipleVerbotenPhrases_ShouldReturnFalsePlusViolations()
         {
             var text = "This is a tweet containing verboten1 and verboten2";
             IVerbotenPhraseProvider provider = Substitute.For<IVerbotenPhraseProvider>();
@@ -61,7 +65,10 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, false);
+            Assert.AreEqual(result.IsSafeText, false);
+            Assert.AreEqual(result.Violations.Count, 2);
+            Assert.IsTrue(result.Violations.Contains("Verboten1"));
+            Assert.IsTrue(result.Violations.Contains("Verboten2"));
         }
 
         [Test]
@@ -74,7 +81,7 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result.IsSafeText, true);
         }
 
 
@@ -88,7 +95,7 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result.IsSafeText, true);
         }
 
         [Test]
@@ -101,7 +108,7 @@ namespace ShouldITweetTests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result, true);
+            Assert.AreEqual(result.IsSafeText, true);
         }
 
         [Test]

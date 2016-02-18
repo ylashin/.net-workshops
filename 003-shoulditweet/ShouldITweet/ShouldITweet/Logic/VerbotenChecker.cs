@@ -7,7 +7,7 @@ namespace ShouldITweet.Logic
 {
     public interface IVerbotenChecker
     {
-        bool ValidateText(string text);
+        VerbotenCheckerResponse ValidateText(string text);
     }
     public class VerbotenChecker : IVerbotenChecker
     {
@@ -17,24 +17,31 @@ namespace ShouldITweet.Logic
         {
             VerbotenPhraseProvider = verbotenPhraseProvider;
         }
-        public bool ValidateText(string text)
+        public VerbotenCheckerResponse ValidateText(string text)
         {
+            var response = new VerbotenCheckerResponse() { IsSafeText = true, Violations = new List<string>() };
+
             if (string.IsNullOrWhiteSpace(text))
-                return true;
+                return response;
 
             if (VerbotenPhraseProvider == null)
                 throw new ArgumentException(NullVerbotenPhraseProvider);
 
-            foreach(var phrase in VerbotenPhraseProvider.GetVerbotenPhrases())
+            
+
+            foreach (var phrase in VerbotenPhraseProvider.GetVerbotenPhrases())
             {
                 if (string.IsNullOrWhiteSpace(phrase))
                     continue;
 
-                if (text.IndexOf(phrase,StringComparison.InvariantCultureIgnoreCase)>=0)
-                    return false;
+                if (text.IndexOf(phrase, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                {
+                    response.IsSafeText = false;
+                    response.Violations.Add(phrase);
+                }                    
             }
 
-            return true;
+            return response;
         }
     }
 }

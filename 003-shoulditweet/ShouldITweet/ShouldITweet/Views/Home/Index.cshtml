@@ -8,7 +8,7 @@
         <h2>
             Should I tweet ?
         </h2>
-        <span class="h4">Please fill the text you are expecting to tweet and click Check Tweet button to see if it contains verboten phrases.</span>
+        <span class="h4">Use the below checker to verify if text is suitable to be posted to Twitter.</span>
     </div>
 
 </div>
@@ -46,6 +46,14 @@
                 {
                     <div class="form-group">
                         <h3 class="text-danger">The tweet does contain problematic phrase(s)</h3>
+                        <h4>Violation(s):</h4>
+                        <ul class="h4">
+                            @foreach(var v in Model.Violations)
+                            {
+                                <li>@v</li>
+                            }
+                        </ul>
+                    
                     </div>
                 }
             }

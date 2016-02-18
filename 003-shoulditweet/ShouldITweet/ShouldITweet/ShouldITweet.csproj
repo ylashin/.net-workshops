@@ -125,6 +125,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\VerbotenChecker.cs" />
+    <Compile Include="Logic\VerbotenCheckerResponse.cs" />
     <Compile Include="Logic\VerbotenPhraseProvider.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

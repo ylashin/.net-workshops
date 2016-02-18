@@ -26,7 +26,9 @@ namespace ShouldITweet.Controllers
             var provider = new FixedVerbotenPhraseProvider();
             var checker = new VerbotenChecker(provider);
 
-            tweet.VerbotenCheckPassed = checker.ValidateText(tweet.Text);
+            var checkResponse = checker.ValidateText(tweet.Text);
+            tweet.VerbotenCheckPassed = checkResponse.IsSafeText;
+            tweet.Violations = checkResponse.Violations;
 
             return View(tweet);
         }
