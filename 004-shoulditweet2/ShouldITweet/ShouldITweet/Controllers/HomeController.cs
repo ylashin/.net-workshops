@@ -10,6 +10,12 @@ namespace ShouldITweet2.Controllers
 {
     public class HomeController : Controller
     {
+        public IVerbotenChecker VerbotenChecker { get; set; }
+        public HomeController(IVerbotenChecker verbotenChecker)
+        {
+            VerbotenChecker = verbotenChecker;
+
+        }
         public ActionResult Index()
         {
             return View(new Tweet() { Text = "" });
@@ -23,10 +29,7 @@ namespace ShouldITweet2.Controllers
                 return View(tweet);
             }
 
-            var provider = new DatabaseVerbotenPhraseProvider();
-            var checker = new VerbotenChecker(provider);
-
-            var checkResponse = checker.ValidateText(tweet.Text);
+            var checkResponse = VerbotenChecker.ValidateText(tweet.Text);
             tweet.VerbotenCheckPassed = checkResponse.IsSafeText;
             tweet.Violations = checkResponse.Violations;
 
