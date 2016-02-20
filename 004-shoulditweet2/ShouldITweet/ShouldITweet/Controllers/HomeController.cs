@@ -23,7 +23,7 @@ namespace ShouldITweet2.Controllers
                 return View(tweet);
             }
 
-            var provider = new FixedVerbotenPhraseProvider();
+            var provider = new DatabaseVerbotenPhraseProvider();
             var checker = new VerbotenChecker(provider);
 
             var checkResponse = checker.ValidateText(tweet.Text);

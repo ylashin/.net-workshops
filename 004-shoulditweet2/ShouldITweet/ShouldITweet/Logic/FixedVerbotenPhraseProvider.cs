@@ -5,10 +5,7 @@ using System.Web;
 
 namespace ShouldITweet2.Logic
 {
-    public interface IVerbotenPhraseProvider
-    {
-        IEnumerable<string> GetVerbotenPhrases();
-    }
+    
     public class FixedVerbotenPhraseProvider : IVerbotenPhraseProvider
     {
         public IEnumerable<string> GetVerbotenPhrases()
