@@ -1,4 +1,5 @@
-﻿using ShouldITweet2.Logic;
+﻿using Serilog;
+using ShouldITweet2.Logic;
 using ShouldITweet2.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace ShouldITweet2.Controllers
 {
     public class HomeController : Controller
     {
+       
         public IVerbotenChecker VerbotenChecker { get; set; }
         public HomeController(IVerbotenChecker verbotenChecker)
         {
@@ -30,24 +32,12 @@ namespace ShouldITweet2.Controllers
             }
 
             var checkResponse = VerbotenChecker.ValidateText(tweet.Text);
+
+            Log.Information("Validated text : {text} with result {validationResult}", tweet.Text, checkResponse.IsSafeText);
             tweet.VerbotenCheckPassed = checkResponse.IsSafeText;
             tweet.Violations = checkResponse.Violations;
 
             return View(tweet);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

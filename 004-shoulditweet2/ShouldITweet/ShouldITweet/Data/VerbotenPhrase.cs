@@ -8,7 +8,7 @@ namespace ShouldITweet2.Data
 {
     public class VerbotenPhrase
     {
-        protected VerbotenPhrase()
+        private VerbotenPhrase()
         {
 
         }
@@ -25,5 +25,21 @@ namespace ShouldITweet2.Data
         [Required]
         public string Phrase { get; protected set; }
         public DateTimeOffset LastModified { get; protected set; }
+
+        internal void SetId(Guid guid)
+        {
+            Id = guid;
+        }
+        internal void SetPhrase(string phrase)
+        {
+            Phrase = phrase;
+        }
+
+        internal void SetLastModified(DateTimeOffset lastModified)
+        {
+            LastModified = lastModified;
+        }
     }
+
+   
 }

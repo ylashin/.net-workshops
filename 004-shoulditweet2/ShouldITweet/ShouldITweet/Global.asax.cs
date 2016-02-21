@@ -1,8 +1,12 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Serilog;
+using Serilog.Extras.Web.Enrichers;
 using ShouldITweet2.Logic;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -46,6 +50,32 @@ namespace ShouldITweet2
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ConfigureLogging();
+        }
+
+        private void ConfigureLogging()
+        {
+            var logger = new LoggerConfiguration()                
+                .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .Enrich.WithProperty("Source", "Web")
+                .Enrich.WithProperty("ServiceAccount", Environment.UserName)
+                .Enrich.WithProperty("ApplicationVersion", GetType().Assembly.GetName().Version)
+                .Enrich.With<HttpRequestClientHostIPEnricher>()
+                .Enrich.With<HttpRequestIdEnricher>()
+                .Enrich.With<HttpRequestNumberEnricher>()
+                .Enrich.With<HttpRequestRawUrlEnricher>()
+                .Enrich.With<HttpRequestTraceIdEnricher>()
+                .Enrich.With<HttpRequestTypeEnricher>()
+                .Enrich.With<HttpRequestUrlReferrerEnricher>()
+                .Enrich.With<HttpRequestUserAgentEnricher>()
+                .Enrich.With<UserNameEnricher>()
+                .WriteTo.RollingFile(ConfigurationManager.AppSettings["LogFilePath"])
+                .WriteTo.Seq(ConfigurationManager.AppSettings["SeqUrl"])
+                .CreateLogger();
+
+            Log.Logger = logger;
         }
     }
 }
