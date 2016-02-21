@@ -14,13 +14,19 @@ namespace ShouldITweet2.Models
             {
                 Id = vp.Id,
                 Phrase = vp.Phrase,
-                LastModified = vp.LastModified
+                LastModified = vp.LastModified.DateTime.ToQldTime()
             };
         }
 
         public static VerbotenPhrase MapToModel(this VerbotenPhraseDto dto)
         {
-            return new VerbotenPhrase(dto.Id, dto.Phrase, dto.LastModified);
+            return new VerbotenPhrase(dto.Id, dto.Phrase, DateTimeOffset.UtcNow);
+        }
+
+        public static DateTime ToQldTime(this DateTime utcDateTime)
+        {
+            var qldTimezone = TimeZoneInfo.FindSystemTimeZoneById("E. Australia Standard Time");
+            return TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, qldTimezone);
         }
     }
 }

@@ -109,3 +109,106 @@
 2016-02-21 18:03:12.134 +10:00 [Information] HTTP "GET" for "/Admin"
 2016-02-21 18:03:12.169 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=d348361a-66ce-4c42-a891-1a2aea9934ea&hash=2b2d1a4e&callback=glimpse.data.initData"
 2016-02-21 18:03:12.575 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/3ce08fde948f431c994e392e52d80b8f?version=2"
+2016-02-21 18:21:41.448 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:21:44.431 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:21:44.467 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_client&hash=2b2d1a4e"
+2016-02-21 18:21:44.567 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_metadata&hash=2b2d1a4e&callback=glimpse.data.initMetadata"
+2016-02-21 18:21:44.587 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_sprite&hash=2b2d1a4e"
+2016-02-21 18:21:44.665 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=7265a0c0-401f-43ff-b336-7421b8e94437&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:21:44.945 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/f0ac17da66bb4765956b7fb388c16ae3?version=2"
+2016-02-21 18:21:52.171 +10:00 [Information] HTTP "GET" for "/Admin/Edit/0ec1684b-80c2-4aba-a6b9-2ea2c2997590"
+2016-02-21 18:21:52.210 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=b1f97fd9-9e96-48dd-8310-46e3d1aaebe2&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:21:52.644 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/13c2e99db4f04defb8e30c0d79df4d3a?version=2"
+2016-02-21 18:21:53.855 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:21:53.899 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:21:53.927 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=8dbb8ba7-0003-4745-93ed-c3749f3c3519&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:21:54.558 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/dd59956bf18f450385544d5de3d37842?version=2"
+2016-02-21 18:21:56.328 +10:00 [Information] HTTP "GET" for "/Admin/Delete/0ec1684b-80c2-4aba-a6b9-2ea2c2997590"
+2016-02-21 18:21:56.360 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=b37792e4-8b2b-49a1-89bd-ec59678451eb&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:21:56.787 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/552af6ebe2b44021800c4e903f420126?version=2"
+2016-02-21 18:22:02.020 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:22:02.062 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:22:02.095 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=7a5c6e4a-36ff-452c-8831-2399a01a217e&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:22:02.528 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/27c7488ee4f340d3b2f1d88187aed6a7?version=2"
+2016-02-21 18:22:03.491 +10:00 [Information] HTTP "GET" for "/Admin/Create"
+2016-02-21 18:22:03.518 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=e3ef1283-b220-4dc4-a21f-73d1599762d2&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:22:03.950 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/ab30bc94a0514198ae3a8917d2e3bb40?version=2"
+2016-02-21 18:22:06.940 +10:00 [Error] Error caught in global handler: "The UTC time represented when the offset is applied must be between year 0 and 10,000.
+Parameter name: offset"
+System.ArgumentOutOfRangeException: The UTC time represented when the offset is applied must be between year 0 and 10,000.
+Parameter name: offset
+   at System.DateTimeOffset.ValidateDate(DateTime dateTime, TimeSpan offset)
+   at System.DateTimeOffset..ctor(DateTime dateTime)
+   at System.DateTimeOffset.op_Implicit(DateTime dateTime)
+   at ShouldITweet2.Models.Extensions.MapToModel(VerbotenPhraseDto dto) in D:\Work\VSProjects\GitHub\.net-workshops\004-shoulditweet2\ShouldITweet\ShouldITweet\Models\Extensions.cs:line 23
+   at ShouldITweet2.Controllers.AdminController.Create(VerbotenPhraseDto verbotenPhraseDto) in D:\Work\VSProjects\GitHub\.net-workshops\004-shoulditweet2\ShouldITweet\ShouldITweet\Controllers\AdminController.cs:line 65
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at Castle.Proxies.AsyncControllerActionInvokerProxy.EndInvokeActionMethod_callback(IAsyncResult asyncResult)
+   at Castle.Proxies.Invocations.AsyncControllerActionInvoker_EndInvokeActionMethod.InvokeMethodOnTarget()
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Glimpse.Core.Extensibility.CastleInvocationToAlternateMethodContextAdapter.Proceed()
+   at Glimpse.Mvc.AlternateType.AsyncActionInvoker.EndInvokeActionMethod.NewImplementation(IAlternateMethodContext context)
+   at Glimpse.Core.Extensibility.AlternateTypeToCastleInterceptorAdapter.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.AsyncControllerActionInvokerProxy.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<BeginExecuteCore>b__1d(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.<BeginExecute>b__15(IAsyncResult asyncResult, Controller controller)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<BeginProcessRequest>b__5(IAsyncResult asyncResult, ProcessRequestState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2016-02-21 18:22:06.958 +10:00 [Information] HTTP "POST" for "/Admin/Create"
+2016-02-21 18:23:06.147 +10:00 [Information] Created verboten phrase "dddddddddd"
+2016-02-21 18:23:06.275 +10:00 [Information] HTTP "POST" for "/Admin/Create"
+2016-02-21 18:23:06.283 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:23:07.942 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:23:07.976 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_client&hash=2b2d1a4e"
+2016-02-21 18:23:08.074 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_metadata&hash=2b2d1a4e&callback=glimpse.data.initMetadata"
+2016-02-21 18:23:08.101 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_sprite&hash=2b2d1a4e"
+2016-02-21 18:23:08.155 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=2512f454-3a29-4996-b3b9-458c5c5f8ebd&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:23:08.494 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/83356ef0d87a4cbd93f307e862c7bac9?version=2"
+2016-02-21 18:23:15.705 +10:00 [Information] HTTP "GET" for "/Admin/Edit/90376efb-46ba-446c-a1ae-bfe26cf9ddb0"
+2016-02-21 18:23:15.740 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=ef1530c2-b605-4e3f-9e79-b0d15e47920e&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:23:16.212 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/26d2ea53440f4e028cad79d4da7b6f75?version=2"
+2016-02-21 18:23:18.142 +10:00 [Information] Updated verboten phrase 90376efb-46ba-446c-a1ae-bfe26cf9ddb0
+2016-02-21 18:23:18.154 +10:00 [Information] HTTP "POST" for "/Admin/Edit/90376efb-46ba-446c-a1ae-bfe26cf9ddb0"
+2016-02-21 18:23:18.162 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:23:18.200 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:23:18.232 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=2c67cd5f-a266-4a15-8431-d97d4a7b7403&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:23:18.650 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/9dd858c6abf44458a147084b3a02c775?version=2"
+2016-02-21 18:23:20.648 +10:00 [Information] HTTP "GET" for "/Admin/Delete/90376efb-46ba-446c-a1ae-bfe26cf9ddb0"
+2016-02-21 18:23:20.688 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=00675445-9fd0-4dcc-8a66-6ad0b623324c&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:23:21.084 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/10e7d5a890fe47ac90c2d3a783a549e5?version=2"
+2016-02-21 18:23:25.790 +10:00 [Information] Deleted verboten phrase 90376efb-46ba-446c-a1ae-bfe26cf9ddb0
+2016-02-21 18:23:25.802 +10:00 [Information] HTTP "POST" for "/Admin/Delete/90376efb-46ba-446c-a1ae-bfe26cf9ddb0"
+2016-02-21 18:23:25.806 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:23:25.844 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:23:25.881 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=d74c1409-cede-4766-8afd-c1f69dd3dcd6&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:23:26.291 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/2e6d39b09f5847d49a4295091b13ef62?version=2"

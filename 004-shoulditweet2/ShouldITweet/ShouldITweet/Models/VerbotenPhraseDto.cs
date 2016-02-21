@@ -13,7 +13,7 @@ namespace ShouldITweet2.Models
         public Guid Id { get;  set; }
         [Required]
         public string Phrase { get;  set; }
-        public DateTimeOffset LastModified { get;  set; }
+        public DateTime LastModified { get;  set; }
 
     }
 }
