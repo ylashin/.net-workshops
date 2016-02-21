@@ -14,13 +14,17 @@ namespace ShouldITweet2.Controllers
 {
     public class AdminController : Controller
     {
-        private ShouldITweetDbContext db = new ShouldITweetDbContext();
+        private IRepository Repository;
 
+        public AdminController(IRepository repository)
+        {
+            Repository = repository;
+        }
         // GET: Admin
         public ActionResult Index()
         {
             Log.Information("Viewing verboten phrase list");
-            return View(db.VerbotenPhrases.ToList().Select(v => v.MapToDto()));
+            return View(Repository.GetAll<VerbotenPhrase>().ToList().Select(v => v.MapToDto()));
         }
 
         // GET: Admin/Details/5
@@ -30,7 +34,9 @@ namespace ShouldITweet2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VerbotenPhrase verbotenPhrase = db.VerbotenPhrases.Find(id);
+
+            var verbotenPhrase = Repository.GetById<VerbotenPhrase>(id.Value);
+
             if (verbotenPhrase == null)
             {
                 return HttpNotFound();
@@ -59,8 +65,9 @@ namespace ShouldITweet2.Controllers
                 var verbotenPhrase = verbotenPhraseDto.MapToModel();
                 verbotenPhrase.SetLastModified(DateTimeOffset.UtcNow);
                 verbotenPhrase.SetId(Guid.NewGuid());
-                db.VerbotenPhrases.Add(verbotenPhrase);
-                db.SaveChanges();
+
+                Repository.AddOrUpdate(verbotenPhrase);
+
                 Log.Information("Created verboten phrase {PhraseText}", verbotenPhrase.Phrase);
                 return RedirectToAction("Index");
             }
@@ -75,7 +82,7 @@ namespace ShouldITweet2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VerbotenPhrase verbotenPhrase = db.VerbotenPhrases.Find(id);
+            VerbotenPhrase verbotenPhrase = Repository.GetById<VerbotenPhrase>(id.Value);
             if (verbotenPhrase == null)
             {
                 return HttpNotFound();
@@ -92,11 +99,17 @@ namespace ShouldITweet2.Controllers
         {
             if (ModelState.IsValid)
             {
-                VerbotenPhrase verbotenPhrase = verbotenPhraseDto.MapToModel();
+                VerbotenPhrase verbotenPhrase = Repository.GetById<VerbotenPhrase>(verbotenPhraseDto.Id);
+
+                if (verbotenPhrase == null)
+                {
+                    return HttpNotFound();
+                }
+
+                verbotenPhrase.SetPhrase(verbotenPhraseDto.Phrase);
+
                 verbotenPhrase.SetLastModified(DateTimeOffset.UtcNow);
 
-                db.Entry(verbotenPhrase).State = EntityState.Modified;
-                db.SaveChanges();
                 Log.Information("Updated verboten phrase {PhraseID}", verbotenPhrase.Id);
                 return RedirectToAction("Index");
             }
@@ -110,7 +123,7 @@ namespace ShouldITweet2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VerbotenPhrase verbotenPhrase = db.VerbotenPhrases.Find(id);
+            VerbotenPhrase verbotenPhrase = Repository.GetById<VerbotenPhrase>(id.Value);
             if (verbotenPhrase == null)
             {
                 return HttpNotFound();
@@ -123,21 +136,16 @@ namespace ShouldITweet2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            VerbotenPhrase verbotenPhrase = db.VerbotenPhrases.Find(id);
-            db.VerbotenPhrases.Remove(verbotenPhrase);
-            db.SaveChanges();
-
+            VerbotenPhrase verbotenPhrase = Repository.GetById<VerbotenPhrase>(id);
+            if (verbotenPhrase == null)
+            {
+                return HttpNotFound();
+            }
+            Repository.Delete(verbotenPhrase);
             Log.Information("Deleted verboten phrase {PhraseID}", id);
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

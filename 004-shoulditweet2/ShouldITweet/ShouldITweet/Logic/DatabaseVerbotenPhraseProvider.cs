@@ -9,12 +9,16 @@ namespace ShouldITweet2.Logic
    
     public class DatabaseVerbotenPhraseProvider : IVerbotenPhraseProvider
     {
+        private IRepository Repository;
+
+        public DatabaseVerbotenPhraseProvider(IRepository repository)
+        {
+            Repository = repository;
+        }
+
         public IEnumerable<string> GetVerbotenPhrases()
         {
-            using (var db = new ShouldITweetDbContext())
-            {
-                return db.VerbotenPhrases.Select(v => v.Phrase).ToList();
-            }
+            return Repository.GetAll<VerbotenPhrase>().Select(v => v.Phrase).ToList();
         }
     }
 }

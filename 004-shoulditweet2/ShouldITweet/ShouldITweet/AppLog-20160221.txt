@@ -86,3 +86,26 @@
 2016-02-21 17:26:56.256 +10:00 [Information] HTTP "POST" for "/"
 2016-02-21 17:26:56.283 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=417367b8-5e11-4f56-a6fc-10b83637dce0&hash=2b2d1a4e&callback=glimpse.data.initData"
 2016-02-21 17:26:56.791 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/f8b35121036e4cc08800c6d76781aaa1?version=2"
+2016-02-21 17:58:52.177 +10:00 [Information] HTTP "GET" for "/"
+2016-02-21 17:58:52.395 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=b6cf20bc-6049-4142-a0c1-6814e132ceb3&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 17:58:52.762 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/a820bdd55fd2429892ee94b6e473c842?version=2"
+2016-02-21 18:02:54.632 +10:00 [Information] Validated text : "sddsds" with result True
+2016-02-21 18:02:54.660 +10:00 [Information] HTTP "POST" for "/"
+2016-02-21 18:02:54.702 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=ddef82b3-bb8b-484d-8a9e-6c73aaf7d6b0&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:02:55.124 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/93956a06717a49e1ae50910a6fcdd42c?version=2"
+2016-02-21 18:03:00.958 +10:00 [Information] Validated text : "sddsds #selfieeeee" with result False
+2016-02-21 18:03:00.982 +10:00 [Information] HTTP "POST" for "/"
+2016-02-21 18:03:01.015 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=ec6046c3-69c0-4078-8f36-e729ed1407b5&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:03:01.435 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/75e93896b0b246ad992cf6555de33959?version=2"
+2016-02-21 18:03:03.337 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:03:06.475 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:03:06.511 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=b7d0fbeb-cceb-429e-b2b6-f017862ce5dd&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:03:06.926 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/8b5f1ebb6cd347e0b6448abdb9572937?version=2"
+2016-02-21 18:03:09.174 +10:00 [Information] Viewing verboten phrase 0ec1684b-80c2-4aba-a6b9-2ea2c2997590
+2016-02-21 18:03:09.226 +10:00 [Information] HTTP "GET" for "/Admin/Details/0ec1684b-80c2-4aba-a6b9-2ea2c2997590"
+2016-02-21 18:03:09.261 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=8b67feea-9bfb-4560-8772-ee7809922c72&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:03:09.658 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/ea28dbac9cff4cb687e76e2e52eb0e13?version=2"
+2016-02-21 18:03:12.090 +10:00 [Information] Viewing verboten phrase list
+2016-02-21 18:03:12.134 +10:00 [Information] HTTP "GET" for "/Admin"
+2016-02-21 18:03:12.169 +10:00 [Information] HTTP "GET" for "/Glimpse.axd?n=glimpse_request&requestId=d348361a-66ce-4c42-a891-1a2aea9934ea&hash=2b2d1a4e&callback=glimpse.data.initData"
+2016-02-21 18:03:12.575 +10:00 [Information] HTTP "GET" for "/__browserLink/requestData/3ce08fde948f431c994e392e52d80b8f?version=2"

@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Serilog;
 using Serilog.Extras.Web.Enrichers;
+using ShouldITweet2.Data;
 using ShouldITweet2.Logic;
 using System;
 using System.Collections.Generic;
@@ -23,8 +24,7 @@ namespace ShouldITweet2
 
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<DatabaseVerbotenPhraseProvider>().As<IVerbotenPhraseProvider>();
-            builder.RegisterType<VerbotenChecker>().As<IVerbotenChecker>();
+            BuildMappings(builder);
 
             // Register your MVC controllers.
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
@@ -52,6 +52,13 @@ namespace ShouldITweet2
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ConfigureLogging();
+        }
+
+        private static void BuildMappings(ContainerBuilder builder)
+        {
+            builder.RegisterType<DatabaseVerbotenPhraseProvider>().As<IVerbotenPhraseProvider>();
+            builder.RegisterType<VerbotenChecker>().As<IVerbotenChecker>();
+            builder.RegisterType<VerbotenPhraseRepository>().As<IRepository>();
         }
 
         private void ConfigureLogging()
