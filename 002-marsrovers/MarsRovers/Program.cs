@@ -69,7 +69,7 @@ namespace MarsRoversApp
         {
             const string UsageMessage = "Please provide path to input file.\r\nUsage : MarsRovers.exe input.txt";
             const string UsageMessageMoreThanOneParam = "Please provide a single input argument.\r\nUsage : MarsRovers.exe input.txt";
-            const string FileDoesNotExistMessage = "File {} does not exit";
+            const string FileDoesNotExistMessage = "File {0} does not exit";
 
             if (args == null || args.Length == 0)
             {

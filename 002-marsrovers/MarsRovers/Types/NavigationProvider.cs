@@ -60,7 +60,7 @@ namespace MarsRoversApp.Types
             rotationMap.Add(MovementAction.L, (r) =>
             {
                 if (!turnLeftMap.ContainsKey(r.Position.Orientation))
-                    throw new ApplicationException("Invalid orientation {r.Position.Orientation} to turn it left");
+                    throw new ApplicationException($"Invalid orientation {r.Position.Orientation} to turn it left");
 
                 r.Position.Orientation = turnLeftMap[r.Position.Orientation];
                 
@@ -69,7 +69,7 @@ namespace MarsRoversApp.Types
             rotationMap.Add(MovementAction.R, (r) => {
 
                 if (!turnRightMap.ContainsKey(r.Position.Orientation))
-                    throw new ApplicationException("Invalid orientation {r.Position.Orientation} to turn it right");
+                    throw new ApplicationException($"Invalid orientation {r.Position.Orientation} to turn it right");
 
                 r.Position.Orientation = turnRightMap[r.Position.Orientation];
                                

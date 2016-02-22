@@ -85,7 +85,7 @@ namespace MarsRoversApp.Types
                     break;
                 default:
                     // Is this the correct default action?
-                    throw new ApplicationException("Invalid movment action {action}");
+                    throw new ApplicationException($"Invalid movment action {action}");
                     
             }
         }
