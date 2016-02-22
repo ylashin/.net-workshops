@@ -1,7 +1,8 @@
 ﻿using Autofac;
-using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Serilog;
 using Serilog.Extras.Web.Enrichers;
+using ShouldITweetClient.App_Start;
 using ShouldITweetClient.Data;
 using ShouldITweetClient.Logic;
 using System;
@@ -11,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -21,36 +23,31 @@ namespace ShouldITweetClient
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
 
             var builder = new ContainerBuilder();
 
             BuildMappings(builder);
 
-            // Register your MVC controllers.
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            // Get your HttpConfiguration.
+            var config = GlobalConfiguration.Configuration;
 
-            // OPTIONAL: Register model binders that require DI.
-            builder.RegisterModelBinders(Assembly.GetExecutingAssembly());
-            builder.RegisterModelBinderProvider();
+            // Register your Web API controllers.
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            // OPTIONAL: Register web abstractions like HttpContextBase.
-            builder.RegisterModule<AutofacWebTypesModule>();
-
-            // OPTIONAL: Enable property injection in view pages.
-            builder.RegisterSource(new ViewRegistrationSource());
-
-            // OPTIONAL: Enable property injection into action filters.
-            builder.RegisterFilterProvider();
+            // OPTIONAL: Register the Autofac filter provider.
+            //builder.RegisterWebApiFilterProvider(config);
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            //AreaRegistration.RegisterAllAreas();
+            
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
             ConfigureLogging();
         }
 
