@@ -1,0 +1,52 @@
+﻿@model ShouldITweetClient.Models.VerbotenPhraseDto
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Verboten Phrase</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="row top-buffer">
+
+            <div class="col-lg-12">
+
+                <div class="form-group">
+                    <div><label for="Phrase">Phrase</label></div>
+                    <div>
+                        @Html.TextBoxFor(m=>m.Phrase, new Dictionary<string, object>() { { "rows", 10 }, { "class", "form-control input-lg" } })
+
+                        <div class="h4 text-danger">@Html.ValidationMessageFor(m => m.Phrase)</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
