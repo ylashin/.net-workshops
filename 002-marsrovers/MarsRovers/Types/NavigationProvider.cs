@@ -41,27 +41,38 @@ namespace MarsRoversApp.Types
         {
             var rotationMap = new Dictionary<MovementAction, Action<Rover>>();
 
+            var turnLeftMap = new Dictionary<Orientation, Orientation>()
+            {
+                { Orientation.N , Orientation.W },
+                { Orientation.W , Orientation.S },
+                { Orientation.S , Orientation.E },
+                { Orientation.E , Orientation.N },
+            };
+
+            var turnRightMap = new Dictionary<Orientation, Orientation>()
+            {
+                { Orientation.N , Orientation.E },
+                { Orientation.E , Orientation.S },
+                { Orientation.S , Orientation.W },
+                { Orientation.W , Orientation.N },
+            };
+
             rotationMap.Add(MovementAction.L, (r) =>
             {
-                if (r.Position.Orientation == Orientation.N) // Use a switch or a map
-                    r.Position.Orientation = Orientation.W;
-                else if (r.Position.Orientation == Orientation.W)
-                    r.Position.Orientation = Orientation.S;
-                else if (r.Position.Orientation == Orientation.S)
-                    r.Position.Orientation = Orientation.E;
-                else if (r.Position.Orientation == Orientation.E)
-                    r.Position.Orientation = Orientation.N;
+                if (!turnLeftMap.ContainsKey(r.Position.Orientation))
+                    throw new ApplicationException("Invalid orientation {r.Position.Orientation} to turn it left");
+
+                r.Position.Orientation = turnLeftMap[r.Position.Orientation];
+                
             });
 
             rotationMap.Add(MovementAction.R, (r) => {
-                if (r.Position.Orientation == Orientation.N)
-                    r.Position.Orientation = Orientation.E;
-                else if (r.Position.Orientation == Orientation.E)
-                    r.Position.Orientation = Orientation.S;
-                else if (r.Position.Orientation == Orientation.S)
-                    r.Position.Orientation = Orientation.W;
-                else if (r.Position.Orientation == Orientation.W)
-                    r.Position.Orientation = Orientation.N;
+
+                if (!turnRightMap.ContainsKey(r.Position.Orientation))
+                    throw new ApplicationException("Invalid orientation {r.Position.Orientation} to turn it right");
+
+                r.Position.Orientation = turnRightMap[r.Position.Orientation];
+                               
             });
 
             return rotationMap;

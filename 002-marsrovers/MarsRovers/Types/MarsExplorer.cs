@@ -12,17 +12,21 @@ namespace MarsRoversApp.Types
     {
         public Plateau Plateau { get;  }       
         // Is this Lazy?
-        public IEnumerable<Rover> Rovers { get;  }
+        public List<Rover> Rovers { get;  }
 
         private INavigationProvider NavigationProvider;
 
-        public MarsExplorer(INavigationProvider navigationProvider, Plateau plateau, IEnumerable<Rover> rovers)
+        public bool IsParsed { get {
+                return Plateau != null && Rovers != null;
+            } }
+
+        public MarsExplorer(INavigationProvider navigationProvider, Plateau plateau, List<Rover> rovers)
         {
             NavigationProvider = navigationProvider;
             Plateau = plateau;
             Rovers = rovers;
         }
-        public MarsExplorer(Plateau plateau,IEnumerable<Rover> rovers)
+        public MarsExplorer(Plateau plateau,List<Rover> rovers)
         {
             NavigationProvider = new DefaultNavigationProvider();
             Plateau = plateau;
@@ -52,13 +56,14 @@ namespace MarsRoversApp.Types
         public void ProcessNavigation()
         {            
             // Multiple enumaration? Why have it lazy?
-            Rovers.ToList().ForEach(r=>
+            foreach(var r in Rovers)
             {
-                r.MovementScript.Movements.ForEach(m => 
+                foreach(var m in r.MovementScript.Movements)
                 {
                     DoAction(r, m);
-                });
-            });
+                }
+            }
+           
         }
 
         public void DoAction(Rover rover, MovementAction action)
@@ -80,7 +85,8 @@ namespace MarsRoversApp.Types
                     break;
                 default:
                     // Is this the correct default action?
-                    break;
+                    throw new ApplicationException("Invalid movment action {action}");
+                    
             }
         }
 

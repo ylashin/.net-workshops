@@ -13,24 +13,19 @@ namespace MarsRoversApp
     class Program
     {
         static void Main(string[] args)
-        {
+        {            
             if (ValidateInput(args) == false)
                 return;
 
-            var fileData = File.ReadAllText(args[0]);
-            MarsExplorer explorer = MarsGrammar.TryParseExplorer(fileData);
-
-            if (explorer==null) // Avoid using null to indicate failure
+            var parseResult = GetParser(args[0]);
+           
+            if (!parseResult.IsSuccess)
             {
-                Console.WriteLine("Unable to parse input file based on Mars Explorer schema");
+                Console.WriteLine(parseResult.Message);
                 return;
             }
 
-            if (explorer.Validate()==false) // Why not use !
-            {
-                Console.WriteLine("Invalid plateua or rover specifications");
-                return;
-            }
+            var explorer = parseResult.Explorer;
             // Seperate UI interaction from logic
             Console.WriteLine("Parsed explorer file, proceeding to calculate navigation");
 
@@ -38,6 +33,25 @@ namespace MarsRoversApp
 
             EchoOutput(explorer.Rovers);
 
+        }
+
+        private static ParsePreparationResult GetParser(string filePath)
+        {
+            var fileData = File.ReadAllText(filePath);
+            MarsExplorer explorer = MarsGrammar.TryParseExplorer(fileData);
+
+            if (!explorer.IsParsed) // Avoid using null to indicate failure
+            {
+                return ParsePreparationResult.CreatedFailedResult("Unable to parse input file based on Mars Explorer schema");                
+            }
+
+            if (!explorer.Validate()) // Why not use !
+            {
+                return ParsePreparationResult.CreatedFailedResult("Invalid plateua or rover specifications");
+                
+            }
+
+            return  ParsePreparationResult.CreateValidResult(explorer);
         }
 
         private static void EchoOutput(IEnumerable<Rover> rovers)
@@ -54,8 +68,8 @@ namespace MarsRoversApp
         private static bool ValidateInput(string[] args)
         {
             const string UsageMessage = "Please provide path to input file.\r\nUsage : MarsRovers.exe input.txt";
-            var UsageMessageMoreThanOneParam = "Please provide a single input argument.\r\nUsage : MarsRovers.exe input.txt";
-            var FileDoesNotExistMessage = "File {} does not exit";
+            const string UsageMessageMoreThanOneParam = "Please provide a single input argument.\r\nUsage : MarsRovers.exe input.txt";
+            const string FileDoesNotExistMessage = "File {} does not exit";
 
             if (args == null || args.Length == 0)
             {
@@ -77,4 +91,34 @@ namespace MarsRoversApp
             return true;
         }
     }
+    public class ParsePreparationResult
+    {
+        public MarsExplorer Explorer { get; set; }
+        public bool IsSuccess { get; set; }
+        public string Message { get; set; }
+
+        private ParsePreparationResult()
+        {
+
+        }
+        internal static ParsePreparationResult CreatedFailedResult(string msg)
+        {
+            return new ParsePreparationResult()
+            {
+                IsSuccess = false,
+                Message = msg
+
+            };
+        }
+
+        internal static ParsePreparationResult CreateValidResult(MarsExplorer explorer)
+        {
+            return new ParsePreparationResult()
+            {
+                IsSuccess = true,
+                Explorer = explorer
+            };
+        }
+    }
+    
 }

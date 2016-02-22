@@ -16,8 +16,6 @@ namespace MarsRoversApp.Parsers
 
         public static readonly Parser<string> Letters = Parse.Letter.AtLeastOnce().Text().Token();
 
-
-
         public static Parser<Plateau> Plateau =
            from width in Number
            from height in Number
@@ -63,7 +61,7 @@ namespace MarsRoversApp.Parsers
         public static Parser<MarsExplorer> MarsExplorer =
            from plateau in Plateau
            from rovers in Rovers
-           select new MarsExplorer(plateau, rovers);
+           select new MarsExplorer(plateau, rovers.ToList());
           
 
         public static MarsExplorer TryParseExplorer(string input)
@@ -74,7 +72,7 @@ namespace MarsRoversApp.Parsers
             }
             catch
             {
-                return null;
+                return new MarsExplorer(null, null) ;
             }
             
         }

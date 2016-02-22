@@ -8,7 +8,7 @@ namespace MarsRoversApp.Types
 {
     public enum MovementAction
     {
-        L,
+        L = 1,
         R,
         M
     }

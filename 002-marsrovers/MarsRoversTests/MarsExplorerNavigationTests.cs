@@ -1,5 +1,6 @@
 ﻿using MarsRoversApp.Types;
 using NUnit.Framework;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,23 +30,26 @@ namespace MarsRoversTests
             return x;
         }
 
-        [TestCase(Orientation.N,  2, 3, TestName = "Facing North")] // Simplify by using a setup method
-        [TestCase(Orientation.S,  2, 1)]
-        [TestCase(Orientation.E,  3, 2)]
-        [TestCase(Orientation.W,  1, 2)]
+        [TestCase(Orientation.N,  2, 3, TestName = "Starting 2,2 => Move Facing North")] // Simplify by using a setup method
+        [TestCase(Orientation.S,  2, 1, TestName = "Starting 2,2 => Move Facing South")]
+        [TestCase(Orientation.E,  3, 2, TestName = "Starting 2,2 => Move Facing East")]
+        [TestCase(Orientation.W,  1, 2, TestName = "Starting 2,2 => Move Facing West")]
         public void Explorer_RoverActionMove_ForwardsTheRoverOneStep( // Better name
-            int startX,int startY, Orientation orientation,
+            Orientation orientation,
             int expectedx,int expectedy
             )
         {
-            MovementAction m;
-
-            MarsExplorer x = Build(2,2,startX,startY,orientation);
+            int width = 10;
+            int height = 10;
+            int startx = 2;
+            int starty = 2;
+                       
+            MarsExplorer x = Build(width,height,startx,starty,orientation);
             var rover = x.Rovers.ToList()[0];
             x.DoAction(rover,MovementAction.M);
 
-            Assert.AreEqual(rover.Position.X , expectedx); // mixed up actual vs expected, FluentAssertions
-            Assert.AreEqual(rover.Position.Y, expectedy);
+            rover.Position.X.ShouldBe(expectedx);
+            rover.Position.Y.ShouldBe(expectedy);
         }
 
 
@@ -67,25 +71,30 @@ namespace MarsRoversTests
         }
 
 
-        [TestCase(10, 10, 2, 10, Orientation.N, MovementAction.L, Orientation.W)]
-        [TestCase(10, 10, 2, 10, Orientation.W, MovementAction.L, Orientation.S)]
-        [TestCase(10, 10, 2, 10, Orientation.S, MovementAction.L, Orientation.E)]
-        [TestCase(10, 10, 2, 10, Orientation.E, MovementAction.L, Orientation.N)]
-        [TestCase(10, 10, 2, 10, Orientation.N, MovementAction.R, Orientation.E)]
-        [TestCase(10, 10, 2, 10, Orientation.E, MovementAction.R, Orientation.S)]
-        [TestCase(10, 10, 2, 10, Orientation.S, MovementAction.R, Orientation.W)]
-        [TestCase(10, 10, 2, 10, Orientation.W, MovementAction.R, Orientation.N)]
+        [TestCase( Orientation.N, MovementAction.L, Orientation.W, TestName = "Turn left while heading north")]
+        [TestCase( Orientation.W, MovementAction.L, Orientation.S, TestName = "Turn left while heading west")]
+        [TestCase( Orientation.S, MovementAction.L, Orientation.E, TestName = "Turn left while heading south")]
+        [TestCase( Orientation.E, MovementAction.L, Orientation.N, TestName = "Turn left while heading east")]
+        [TestCase( Orientation.N, MovementAction.R, Orientation.E, TestName = "Turn right while heading north")]
+        [TestCase( Orientation.E, MovementAction.R, Orientation.S, TestName = "Turn right while heading east")]
+        [TestCase( Orientation.S, MovementAction.R, Orientation.W, TestName = "Turn right while heading south")]
+        [TestCase( Orientation.W, MovementAction.R, Orientation.N, TestName = "Turn right while heading west")]
 
         public void Explorer_RoverActionRotate_ValidNewOrientation(
-            int width, int height, int startX, int startY, Orientation orientation, MovementAction action,
+            Orientation orientation, MovementAction action,
             Orientation expected
             )
         {
+            int width = 10;
+            int height = 10;
+            int startX = 2;
+            int startY = 10;
+
             MarsExplorer x = Build(width, height, startX, startY, orientation);
             var rover = x.Rovers.ToList()[0];
             x.DoAction(rover, action);
 
-            Assert.AreEqual(rover.Position.Orientation, expected);
+            rover.Position.Orientation.ShouldBe(expected);
         }
 
     }
