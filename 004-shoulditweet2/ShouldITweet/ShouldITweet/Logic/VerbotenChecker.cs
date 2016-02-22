@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,35 +12,34 @@ namespace ShouldITweet2.Logic
     }
     public class VerbotenChecker : IVerbotenChecker
     {
-        public static readonly string NullVerbotenPhraseProvider = "Verboten Phrase Provider is NULL";
+        public const string NullVerbotenPhraseProvider = "Verboten Phrase Provider is NULL";
+        // Inline this, should be const, use nameof
         private IVerbotenPhraseProvider VerbotenPhraseProvider;
         public VerbotenChecker(IVerbotenPhraseProvider verbotenPhraseProvider)
         {
+            if (verbotenPhraseProvider == null)
+                throw new ArgumentException(NullVerbotenPhraseProvider); // Too Late
+
             VerbotenPhraseProvider = verbotenPhraseProvider;
         }
         public VerbotenCheckerResponse ValidateText(string text)
         {
-            var response = new VerbotenCheckerResponse() { IsSafeText = true, Violations = new List<string>() };
+            // Make response immutible
+            var response = VerbotenCheckerResponse.GetHappyEmptyResponse();
 
             if (string.IsNullOrWhiteSpace(text))
                 return response;
 
-            if (VerbotenPhraseProvider == null)
-                throw new ArgumentException(NullVerbotenPhraseProvider);
-
-            
-
-            foreach (var phrase in VerbotenPhraseProvider.GetVerbotenPhrases())
-            {
-                if (string.IsNullOrWhiteSpace(phrase))
-                    continue;
-
-                if (text.IndexOf(phrase, StringComparison.InvariantCultureIgnoreCase) >= 0)
+            VerbotenPhraseProvider.GetVerbotenPhrases()
+                .Where(phrase => !string.IsNullOrWhiteSpace(phrase))
+                .Where(phrase => text.IndexOf(phrase, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                .ToList().ForEach(phrase =>
                 {
-                    response.IsSafeText = false;
-                    response.Violations.Add(phrase);
-                }                    
-            }
+                    response.FailItAndAddViolation(phrase);
+                });
+
+            // Move closer to occurance
+            Log.Information("Validated text : {text} with result {validationResult}", text, response.IsSafeText);
 
             return response;
         }

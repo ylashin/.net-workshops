@@ -13,7 +13,7 @@ namespace ShouldITweet2.Data
 
         }
 
-        public VerbotenPhrase(Guid id,string phrase,DateTimeOffset lastModified)
+        private VerbotenPhrase(Guid id,string phrase,DateTimeOffset lastModified)
         {
             Id = id;
             Phrase = phrase;
@@ -26,18 +26,15 @@ namespace ShouldITweet2.Data
         public string Phrase { get; protected set; }
         public DateTimeOffset LastModified { get; protected set; }
 
-        internal void SetId(Guid guid)
-        {
-            Id = guid;
-        }
-        internal void SetPhrase(string phrase, DateTimeOffset currrentTime)
+        internal void UpdatePhrase(string phrase)
         {
             Phrase = phrase;
+            LastModified = DateTimeOffset.UtcNow;
         }
 
-        internal void SetLastModified(DateTimeOffset lastModified)
+        internal static VerbotenPhrase Create(string phrase)
         {
-            LastModified = lastModified;
+            return new VerbotenPhrase(Guid.NewGuid(), phrase, DateTimeOffset.UtcNow);
         }
     }
 

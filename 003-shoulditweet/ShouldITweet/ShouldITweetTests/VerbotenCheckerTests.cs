@@ -114,11 +114,8 @@ namespace ShouldITweetTests
         [Test]
         public void VerbotenChecker_WhenCheckingTextWhileVerbotenProviderIsNull_ShouldThrowException()
         {
-            var text = "This is a tweet containing good safe text";
             
-            VerbotenChecker checker = new VerbotenChecker(null);
-
-            var ex = Assert.Catch<ArgumentException>(() => checker.ValidateText(text));
+            var ex = Assert.Catch<ArgumentException>(() => new VerbotenChecker(null));
             StringAssert.Contains(VerbotenChecker.NullVerbotenPhraseProvider, ex.Message);            
         }
 

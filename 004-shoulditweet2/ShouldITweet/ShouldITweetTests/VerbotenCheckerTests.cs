@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using ShouldITweet2.Logic;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace ShouldITweet2Tests
 {
-    [TestFixture]
     public class VerbotenCheckerTests
     {
         [TestCase("")]
@@ -22,10 +22,10 @@ namespace ShouldITweet2Tests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, true);
+            result.IsSafeText.ShouldBe(true);
         }
 
-        [Test]        
+        [Test]
         public void VerbotenChecker_WhenCheckingTextWithVerbotenPhrases_ShouldReturnFalsePlusViolations()
         {
             var text = "This is a tweet containing verboten";
@@ -35,9 +35,9 @@ namespace ShouldITweet2Tests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, false);
-            Assert.AreEqual(result.Violations.Count, 1);
-            Assert.AreEqual(result.Violations[0], "verboten");
+            result.IsSafeText.ShouldBe(false);
+            result.Violations.Count.ShouldBe(1);
+            result.Violations[0].ShouldBe("verboten");
         }
 
         [Test]
@@ -50,9 +50,9 @@ namespace ShouldITweet2Tests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, false);
-            Assert.AreEqual(result.Violations.Count, 1);
-            Assert.AreEqual(result.Violations[0], "Verboten");
+            result.IsSafeText.ShouldBe(false);
+            result.Violations.Count.ShouldBe(1);
+            result.Violations[0].ShouldBe("Verboten");
         }
 
         [Test]
@@ -65,10 +65,10 @@ namespace ShouldITweet2Tests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, false);
-            Assert.AreEqual(result.Violations.Count, 2);
-            Assert.IsTrue(result.Violations.Contains("Verboten1"));
-            Assert.IsTrue(result.Violations.Contains("Verboten2"));
+            result.IsSafeText.ShouldBe(false);
+            result.Violations.Count.ShouldBe(2);
+            result.Violations.Contains("Verboten1").ShouldBeTrue();
+            result.Violations.Contains("Verboten2").ShouldBeTrue();
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace ShouldITweet2Tests
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, true);
+            result.IsSafeText.ShouldBe(true);
         }
 
 
@@ -90,12 +90,12 @@ namespace ShouldITweet2Tests
         {
             var text = "This is a tweet containing verboten1 and verboten2";
             IVerbotenPhraseProvider provider = Substitute.For<IVerbotenPhraseProvider>();
-            provider.GetVerbotenPhrases().ReturnsForAnyArgs(new List<string> {  });
+            provider.GetVerbotenPhrases().ReturnsForAnyArgs(new List<string> { });
             VerbotenChecker checker = new VerbotenChecker(provider);
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, true);
+            result.IsSafeText.ShouldBe(true);
         }
 
         [Test]
@@ -103,25 +103,21 @@ namespace ShouldITweet2Tests
         {
             var text = "This is a tweet containing verboten1 and verboten2";
             IVerbotenPhraseProvider provider = Substitute.For<IVerbotenPhraseProvider>();
-            provider.GetVerbotenPhrases().ReturnsForAnyArgs(new List<string> { null,"","   " });
+            provider.GetVerbotenPhrases().ReturnsForAnyArgs(new List<string> { null, "", "   " });
             VerbotenChecker checker = new VerbotenChecker(provider);
 
             var result = checker.ValidateText(text);
 
-            Assert.AreEqual(result.IsSafeText, true);
+            result.IsSafeText.ShouldBe(true);
         }
 
         [Test]
         public void VerbotenChecker_WhenCheckingTextWhileVerbotenProviderIsNull_ShouldThrowException()
-        {
-            var text = "This is a tweet containing good safe text";
-            
-            VerbotenChecker checker = new VerbotenChecker(null);
-
-            var ex = Assert.Catch<ArgumentException>(() => checker.ValidateText(text));
-            StringAssert.Contains(VerbotenChecker.NullVerbotenPhraseProvider, ex.Message);            
+        {            
+            var ex = Assert.Catch<ArgumentException>(() => new VerbotenChecker(null));
+            StringAssert.Contains(VerbotenChecker.NullVerbotenPhraseProvider, ex.Message);
         }
 
-        
+
     }
 }

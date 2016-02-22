@@ -15,5 +15,6 @@ namespace ShouldITweet2.Models
         public string Phrase { get;  set; }
         public DateTime LastModified { get;  set; }
 
+        
     }
 }

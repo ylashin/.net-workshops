@@ -58,7 +58,7 @@ namespace ShouldITweet2
         {
             builder.RegisterType<DatabaseVerbotenPhraseProvider>().As<IVerbotenPhraseProvider>();
             builder.RegisterType<VerbotenChecker>().As<IVerbotenChecker>();
-            builder.RegisterType<VerbotenPhraseRepository>().As<IRepository>();
+            builder.RegisterType<VerbotenPhraseRepository<VerbotenPhrase>>().As<IRepository<VerbotenPhrase>>();
         }
 
         private void ConfigureLogging()

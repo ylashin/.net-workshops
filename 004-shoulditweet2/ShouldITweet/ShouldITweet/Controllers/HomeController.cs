@@ -32,8 +32,7 @@ namespace ShouldITweet2.Controllers
             }
 
             var checkResponse = VerbotenChecker.ValidateText(tweet.Text);
-            // Move closer to occurance
-            Log.Information("Validated text : {text} with result {validationResult}", tweet.Text, checkResponse.IsSafeText);
+            
             tweet.VerbotenCheckPassed = checkResponse.IsSafeText;
             tweet.Violations = checkResponse.Violations;
 

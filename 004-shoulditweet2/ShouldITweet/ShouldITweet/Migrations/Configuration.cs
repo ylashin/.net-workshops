@@ -17,12 +17,11 @@ namespace ShouldITweet2.Migrations
         {
             //  This method will be called after migrating to the latest version.
             
-            context.VerbotenPhrases.AddOrUpdate(
-                p => p.Id,
-                new VerbotenPhrase (Guid.Parse("{51FBEC78-2F16-4BA9-9815-EDF511F17668}"), "#selfie", DateTime.UtcNow),
-                new VerbotenPhrase(Guid.Parse("{0EC1684B-80C2-4ABA-A6B9-2EA2C2997590}"), "Trump", DateTime.UtcNow)
-              );
+            if (!context.VerbotenPhrases.Any(a=>a.Phrase== "#selfie"))
+                context.VerbotenPhrases.Add(VerbotenPhrase.Create("#selfie"));
 
+            if (!context.VerbotenPhrases.Any(a => a.Phrase == "Trump"))
+                context.VerbotenPhrases.Add(VerbotenPhrase.Create("Trump"));
         }
     }
 }

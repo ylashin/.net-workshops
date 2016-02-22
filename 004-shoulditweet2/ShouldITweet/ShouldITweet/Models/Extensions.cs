@@ -16,12 +16,7 @@ namespace ShouldITweet2.Models
                 Phrase = vp.Phrase,
                 LastModified = vp.LastModified.DateTime.ToQldTime()
             };
-        }
-
-        public static VerbotenPhrase MapToModel(this VerbotenPhraseDto dto)
-        {
-            return new VerbotenPhrase(dto.Id, dto.Phrase, DateTimeOffset.UtcNow);
-        }
+        }       
 
         public static DateTime ToQldTime(this DateTime utcDateTime)
         {
