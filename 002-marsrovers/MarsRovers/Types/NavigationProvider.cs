@@ -43,7 +43,7 @@ namespace MarsRoversApp.Types
 
             rotationMap.Add(MovementAction.L, (r) =>
             {
-                if (r.Position.Orientation == Orientation.N)
+                if (r.Position.Orientation == Orientation.N) // Use a switch or a map
                     r.Position.Orientation = Orientation.W;
                 else if (r.Position.Orientation == Orientation.W)
                     r.Position.Orientation = Orientation.S;

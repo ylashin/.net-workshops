@@ -1,6 +1,6 @@
 ﻿using MarsRoversApp.Parsers;
 using MarsRoversApp.Types;
-using Sprache;
+using Sprache; // Love it
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,18 +20,18 @@ namespace MarsRoversApp
             var fileData = File.ReadAllText(args[0]);
             MarsExplorer explorer = MarsGrammar.TryParseExplorer(fileData);
 
-            if (explorer==null)
+            if (explorer==null) // Avoid using null to indicate failure
             {
                 Console.WriteLine("Unable to parse input file based on Mars Explorer schema");
                 return;
             }
 
-            if (explorer.Validate()==false)
+            if (explorer.Validate()==false) // Why not use !
             {
                 Console.WriteLine("Invalid plateua or rover specifications");
                 return;
             }
-
+            // Seperate UI interaction from logic
             Console.WriteLine("Parsed explorer file, proceeding to calculate navigation");
 
             explorer.ProcessNavigation();
@@ -53,7 +53,7 @@ namespace MarsRoversApp
 
         private static bool ValidateInput(string[] args)
         {
-            var UsageMessage = "Please provide path to input file.\r\nUsage : MarsRovers.exe input.txt";
+            const string UsageMessage = "Please provide path to input file.\r\nUsage : MarsRovers.exe input.txt";
             var UsageMessageMoreThanOneParam = "Please provide a single input argument.\r\nUsage : MarsRovers.exe input.txt";
             var FileDoesNotExistMessage = "File {} does not exit";
 

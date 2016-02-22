@@ -30,7 +30,7 @@ namespace ShouldITweet2.Data
         {
             Id = guid;
         }
-        internal void SetPhrase(string phrase)
+        internal void SetPhrase(string phrase, DateTimeOffset currrentTime)
         {
             Phrase = phrase;
         }

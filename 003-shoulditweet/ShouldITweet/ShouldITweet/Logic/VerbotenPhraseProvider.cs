@@ -18,7 +18,7 @@ namespace ShouldITweet.Logic
                 "Trump",
                 "#selfie",
                 "hillary"
-            }.AsEnumerable();
+            }; // Why?
         }
     }
 }

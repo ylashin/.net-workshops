@@ -62,9 +62,9 @@ namespace ShouldITweet2.Controllers
 
             if (ModelState.IsValid)
             {
-                var verbotenPhrase = verbotenPhraseDto.MapToModel();
-                verbotenPhrase.SetLastModified(DateTimeOffset.UtcNow);
-                verbotenPhrase.SetId(Guid.NewGuid());
+                var verbotenPhrase = verbotenPhraseDto.MapToModel(); // This is confusing
+                verbotenPhrase.SetLastModified(DateTimeOffset.UtcNow); // Push this responsibility to the Domain?
+                verbotenPhrase.SetId(Guid.NewGuid()); // This method should not exist
 
                 Repository.AddOrUpdate(verbotenPhrase);
 
@@ -76,7 +76,7 @@ namespace ShouldITweet2.Controllers
         }
 
         // GET: Admin/Edit/5
-        public ActionResult Edit(Guid? id)
+        public ActionResult Edit(Guid? id) // Not null?
         {
             if (id == null)
             {
@@ -108,7 +108,7 @@ namespace ShouldITweet2.Controllers
 
                 verbotenPhrase.SetPhrase(verbotenPhraseDto.Phrase);
 
-                verbotenPhrase.SetLastModified(DateTimeOffset.UtcNow);
+                verbotenPhrase.SetLastModified(DateTimeOffset.UtcNow); // To Domain
 
                 Log.Information("Updated verboten phrase {PhraseID}", verbotenPhrase.Id);
                 return RedirectToAction("Index");
@@ -117,18 +117,9 @@ namespace ShouldITweet2.Controllers
         }
 
         // GET: Admin/Delete/5
-        public ActionResult Delete(Guid? id)
+        public ActionResult Delete(Guid? id) // Use details
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VerbotenPhrase verbotenPhrase = Repository.GetById<VerbotenPhrase>(id.Value);
-            if (verbotenPhrase == null)
-            {
-                return HttpNotFound();
-            }
-            return View(verbotenPhrase.MapToDto());
+            return Details(id);
         }
 
         // POST: Admin/Delete/5

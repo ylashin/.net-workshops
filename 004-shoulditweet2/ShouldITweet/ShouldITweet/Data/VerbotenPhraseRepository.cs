@@ -12,7 +12,7 @@ namespace ShouldITweet2.Data
         void AddOrUpdate<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
     }
-    public class VerbotenPhraseRepository : IRepository, IDisposable
+    public class VerbotenPhraseRepository : IRepository, IDisposable // Could make this generic
     {
         private ShouldITweetDbContext db = new ShouldITweetDbContext();
 

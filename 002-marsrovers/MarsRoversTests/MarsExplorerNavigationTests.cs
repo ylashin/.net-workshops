@@ -29,20 +29,22 @@ namespace MarsRoversTests
             return x;
         }
 
-        [TestCase(10, 10, 2, 2, Orientation.N, MovementAction.M, 2, 3)]
-        [TestCase(10, 10, 2, 2, Orientation.S, MovementAction.M, 2, 1)]
-        [TestCase(10, 10, 2, 2, Orientation.E, MovementAction.M, 3, 2)]
-        [TestCase(10, 10, 2, 2, Orientation.W, MovementAction.M, 1, 2)]
-        public void Explorer_RoverActionMove_ForwardsTheRoverOneStep(
-            int width,int height,int startX,int startY, Orientation orientation,MovementAction action,
+        [TestCase(Orientation.N,  2, 3, TestName = "Facing North")] // Simplify by using a setup method
+        [TestCase(Orientation.S,  2, 1)]
+        [TestCase(Orientation.E,  3, 2)]
+        [TestCase(Orientation.W,  1, 2)]
+        public void Explorer_RoverActionMove_ForwardsTheRoverOneStep( // Better name
+            int startX,int startY, Orientation orientation,
             int expectedx,int expectedy
             )
         {
-            MarsExplorer x = Build(width,height,startX,startY,orientation);
-            var rover = x.Rovers.ToList()[0];
-            x.DoAction(rover,action);
+            MovementAction m;
 
-            Assert.AreEqual(rover.Position.X , expectedx);
+            MarsExplorer x = Build(2,2,startX,startY,orientation);
+            var rover = x.Rovers.ToList()[0];
+            x.DoAction(rover,MovementAction.M);
+
+            Assert.AreEqual(rover.Position.X , expectedx); // mixed up actual vs expected, FluentAssertions
             Assert.AreEqual(rover.Position.Y, expectedy);
         }
 

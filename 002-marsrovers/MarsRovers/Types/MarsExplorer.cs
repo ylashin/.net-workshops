@@ -11,6 +11,7 @@ namespace MarsRoversApp.Types
     public class MarsExplorer
     {
         public Plateau Plateau { get;  }       
+        // Is this Lazy?
         public IEnumerable<Rover> Rovers { get;  }
 
         private INavigationProvider NavigationProvider;
@@ -30,7 +31,7 @@ namespace MarsRoversApp.Types
 
         public bool Validate()
         {
-            if (Plateau == null || Rovers == null || Rovers.Count() == 0)
+            if (Plateau == null || Rovers == null || !Rovers.Any()) // .Any()
                 return false;
 
             if (Plateau.Width <= 0 || Plateau.Height <= 0)
@@ -50,6 +51,7 @@ namespace MarsRoversApp.Types
         }
         public void ProcessNavigation()
         {            
+            // Multiple enumaration? Why have it lazy?
             Rovers.ToList().ForEach(r=>
             {
                 r.MovementScript.Movements.ForEach(m => 
@@ -64,6 +66,7 @@ namespace MarsRoversApp.Types
             var moveMap = NavigationProvider.GetMoveActionCommands();
             var rotationMap = NavigationProvider.GetRotationCommands();
 
+            // Alternate: use a map
             switch (action)
             {
                 case MovementAction.M:
@@ -76,6 +79,7 @@ namespace MarsRoversApp.Types
                     rotationCommand(rover);
                     break;
                 default:
+                    // Is this the correct default action?
                     break;
             }
         }

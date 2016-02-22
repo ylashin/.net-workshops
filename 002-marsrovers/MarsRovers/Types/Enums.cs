@@ -15,7 +15,7 @@ namespace MarsRoversApp.Types
 
     public enum Orientation
     {
-        N,
+        N = 1,
         S,
         E,
         W
