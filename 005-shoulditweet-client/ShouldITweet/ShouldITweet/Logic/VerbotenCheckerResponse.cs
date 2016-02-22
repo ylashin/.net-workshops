@@ -23,12 +23,12 @@ namespace ShouldITweetClient.Logic
         public bool IsSafeText { get { return _IsSafeText; } }
         public IList<string> Violations { get { return _violations.AsReadOnly(); } }
 
-        internal static VerbotenCheckerResponse GetHappyEmptyResponse()
+        public static VerbotenCheckerResponse GetHappyEmptyResponse()
         {
             return new VerbotenCheckerResponse(true, new List<string>());
         }
 
-        internal void FailItAndAddViolation(string violation)
+        public void FailItAndAddViolation(string violation)
         {
             _IsSafeText = false;
             _violations.Add(violation);

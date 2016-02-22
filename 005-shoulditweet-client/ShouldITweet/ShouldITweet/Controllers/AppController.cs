@@ -1,4 +1,6 @@
-﻿using ShouldITweetClient.Logic;
+﻿using Serilog;
+using ShouldITweetClient.Data;
+using ShouldITweetClient.Logic;
 using ShouldITweetClient.Models;
 using System;
 using System.Collections.Generic;
@@ -11,29 +13,30 @@ namespace ShouldITweetClient.Controllers
 {
     public class AppController : ApiController
     {
-        public IVerbotenChecker VerbotenChecker { get; set; }
-        public AppController(IVerbotenChecker verbotenChecker)
+        private IVerbotenChecker VerbotenChecker;
+        private IRepository<VerbotenPhrase> Repository;
+        public AppController(IVerbotenChecker verbotenChecker, IRepository<VerbotenPhrase> repository)
         {
             VerbotenChecker = verbotenChecker;
+            Repository = repository;
 
         }
 
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("api/app/phrases/getall")]
+        public IEnumerable<VerbotenPhraseDto> GetAllPhrases()
         {
-            return new string[] { "value1", "value2" };
+            return Repository.GetAll().Select(a=>a.MapToDto());
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+       
+       
 
-        // POST api/<controller>
+        [HttpPost]
+        [Route("api/app/tweet/check")]
         public Tweet Post([FromBody]Tweet tweet)
         {
-            if (tweet==null || string.IsNullOrWhiteSpace(tweet.Text))
+            if (tweet == null || string.IsNullOrWhiteSpace(tweet.Text))
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
@@ -47,14 +50,66 @@ namespace ShouldITweetClient.Controllers
 
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPost]
+        [Route("api/app/phrases/add")]
+        public VerbotenPhraseDto Create([FromBody] VerbotenPhraseDto verbotenPhraseDto)
         {
+
+            if (verbotenPhraseDto == null || string.IsNullOrWhiteSpace(verbotenPhraseDto.Phrase))
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            var verbotenPhrase = VerbotenPhrase.Create(verbotenPhraseDto.Phrase);
+            Repository.AddOrUpdate(verbotenPhrase);
+
+            Log.Information("Created verboten phrase {PhraseText}", verbotenPhrase.Phrase);
+
+            return verbotenPhrase.MapToDto();
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+
+        [HttpPut]
+        [Route("api/app/phrases/update")]
+        public VerbotenPhraseDto Update([FromBody] VerbotenPhraseDto verbotenPhraseDto)
         {
+            if (verbotenPhraseDto == null || string.IsNullOrWhiteSpace(verbotenPhraseDto.Phrase) ||
+                verbotenPhraseDto.Id == Guid.Empty)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            VerbotenPhrase verbotenPhrase = Repository.GetById(verbotenPhraseDto.Id);
+
+            if (verbotenPhrase == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            verbotenPhrase.UpdatePhrase(verbotenPhraseDto.Phrase);
+
+            Repository.AddOrUpdate(verbotenPhrase);
+
+            Log.Information("Updated verboten phrase {PhraseID}", verbotenPhrase.Id);
+
+            return verbotenPhrase.MapToDto();
         }
+
+
+        [HttpDelete]
+        [Route("api/app/phrases/delete/{id}")]
+        public void Delete(Guid id)
+        {
+            VerbotenPhrase verbotenPhrase = Repository.GetById(id);
+            if (verbotenPhrase == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            Repository.Delete(verbotenPhrase);
+            Log.Information("Deleted verboten phrase {PhraseID}", id);            
+        }
+
+
     }
 }

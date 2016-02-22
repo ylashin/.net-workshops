@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Extras.Web.Enrichers;
 using ShouldITweetClient.App_Start;
@@ -32,6 +33,9 @@ namespace ShouldITweetClient
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
 
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
@@ -43,11 +47,11 @@ namespace ShouldITweetClient
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             //AreaRegistration.RegisterAllAreas();
-            
+
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+
             ConfigureLogging();
         }
 
@@ -60,7 +64,7 @@ namespace ShouldITweetClient
 
         private void ConfigureLogging()
         {
-            var logger = new LoggerConfiguration()                
+            var logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithProperty("Source", "Web")
