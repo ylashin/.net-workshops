@@ -1,23 +1,49 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular.module('app')
-        .factory('appService', appService);
+        .factory('appService', ['toastr', 'httpBusyService', appService]);
+
+
+
 
     /* @ngInject */
     function appService(toastr, httpBusyService) {
         return {
             checkTweet: checkTweet,
             getPhrases: getPhrases,
-            getGoalTypes: getGoalTypes,
-            delete: deleteGoal
+            getPhrase: getPhrase,
+            savePhrase: savePhrase,
+            deletePhrase: deletePhrase
+
         };
 
         function checkTweet(tweet) {
             var action = 'checking tweet';
             return httpBusyService
-                .post(action, 'api/app/tweet/check',tweet);
+                .post(action, 'api/app/tweet/check', tweet);
         }
+
+        function savePhrase(phrase) {
+            var action = 'saving phrase';
+            if (phrase.id) {
+                return httpBusyService
+                .put(action, 'api/app/phrases/update', phrase);
+            }
+            else {
+                return httpBusyService
+                .post(action, 'api/app/phrases/add', phrase);
+            }
+
+        }
+
+        function deletePhrase(id) {
+            var action = 'deleting phrase';
+
+            return httpBusyService
+            .delete(action, 'api/app/phrases/delete/' + id);
+        }
+
 
         function getPhrases() {
             var action = 'getting all phrases';
@@ -28,20 +54,12 @@
                 });
         }
 
-        function getGoalTypes() {
-            var action = 'loading goal types';
+        function getPhrase(id) {
+            var action = 'loading...';
             return httpBusyService
-                .get(action, 'admin/goal/types/')
-                .catch(function () {
-                    notifyError(action);
-                });
-        }
-
-        function deleteGoal(ypId, goalId) {
-            var action = 'deleting young person goal';
-            return httpBusyService
-                .delete(action, 'admin/goal/' + ypId + '/' + goalId)
-                .catch(function () {
+                .get(action, 'api/app/phrases/' + id)
+                .catch(function (error) {
+                    console.error(error);
                     notifyError(action);
                 });
         }

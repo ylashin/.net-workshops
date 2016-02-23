@@ -12,9 +12,9 @@ namespace ShouldITweetClientTests
 {
     public class VerbotenCheckerTests
     {
-        [TestCase("")]
-        [TestCase("        ")]
-        [TestCase(null)]
+        [TestCase("",TestName = "VerbotenChecker Return true with empty input")]
+        [TestCase("        ",TestName = "VerbotenChecker Return true with fully white space input")]
+        [TestCase(null,TestName = "VerbotenChecker Return true with null input")]
         public void VerbotenChecker_WhenCheckingEmptyText_ShouldReturnTrue(string text)
         {
             IVerbotenPhraseProvider provider = Substitute.For<IVerbotenPhraseProvider>();

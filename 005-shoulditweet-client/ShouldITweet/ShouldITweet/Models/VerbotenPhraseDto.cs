@@ -12,6 +12,7 @@ namespace ShouldITweetClient.Models
         [Key]
         public Guid Id { get;  set; }
         [Required]
+        [MaxLength(100)]
         public string Phrase { get;  set; }
         public DateTime LastModified { get;  set; }
 

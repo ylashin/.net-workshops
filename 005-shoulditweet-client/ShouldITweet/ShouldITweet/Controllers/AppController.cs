@@ -32,8 +32,15 @@ namespace ShouldITweetClient.Controllers
             return Repository.GetAll().Select(a=>a.MapToDto());
         }
 
-       
-       
+        [HttpGet]
+        [Route("api/app/phrases/{id}")]
+        public VerbotenPhraseDto GetPhrase(Guid id)
+        {
+            return Repository.GetById(id).MapToDto();
+        }
+
+
+
 
         [HttpPost]
         [Route("api/app/tweet/check")]

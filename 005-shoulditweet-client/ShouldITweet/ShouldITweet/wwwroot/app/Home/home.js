@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('app')
-        .controller('HomeController', HomeController);
+        .controller('HomeController', ['$state', '$scope', 'toastr', 'appService',HomeController]);
 
     /* @ngInject */
     function HomeController($state, $scope, toastr, appService) {

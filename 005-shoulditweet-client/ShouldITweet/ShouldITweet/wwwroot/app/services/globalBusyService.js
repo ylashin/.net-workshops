@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app')
-        .factory('globalBusyService', globalBusyService);
+        .factory('globalBusyService',['$rootScope', globalBusyService]);
 
     /* @ngInject */
     function globalBusyService($rootScope) {

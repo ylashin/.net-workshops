@@ -181,8 +181,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AppController.cs" />
@@ -191,7 +189,7 @@
     <Compile Include="Data\VerbotenPhrase.cs" />
     <Compile Include="Data\VerbotenPhraseRepository.cs" />
     <Compile Include="Filters\ValidateModelAttribute.cs" />
-    <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,26 +213,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="app\app.js" />
+    <Content Include="app\templates.js" />
+    <Content Include="Content\vendor.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\roundCorner.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="gulpfile.js" />
     <Content Include="index.html" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
+    <Content Include="vendor\vendor.js" />
     <Content Include="wwwroot\app\admin\admin-edit.html" />
     <Content Include="wwwroot\app\admin\admin-edit.js" />
     <Content Include="wwwroot\app\admin\admin.html" />
     <Content Include="wwwroot\app\admin\admin.js" />
     <Content Include="wwwroot\app\app.js" />
-    <Content Include="wwwroot\app\Bootstrapper.js" />
-    <Content Include="wwwroot\app\config.routes.js" />
-    <Content Include="wwwroot\app\Home\home.html" />
-    <Content Include="wwwroot\app\Home\home.js" />
+    <Content Include="wwwroot\app\home\home.html" />
+    <Content Include="wwwroot\app\home\home.js" />
     <Content Include="wwwroot\app\services\appService.js" />
     <Content Include="wwwroot\app\services\globalBusyService.js" />
     <Content Include="wwwroot\app\services\httpBusyService.js" />
@@ -829,17 +826,7 @@
     <Content Include="wwwroot\lib\moment\templates\globals.js" />
     <Content Include="wwwroot\lib\moment\templates\locale-header.js" />
     <Content Include="wwwroot\lib\moment\templates\test-header.js" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="package.json" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -848,16 +835,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\Create.cshtml" />
-    <Content Include="Views\Admin\Delete.cshtml" />
-    <Content Include="Views\Admin\Details.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="wwwroot\lib\angular\.bower.json" />
     <Content Include="wwwroot\lib\angular\angular.min.js.gzip" />
     <Content Include="wwwroot\lib\angular\angular.min.js.map" />
@@ -1021,13 +998,13 @@
     <Content Include="wwwroot\lib\moment\LICENSE" />
     <Content Include="wwwroot\lib\moment\README.md" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602201031294_Add Verboten Phrases table.resx">
@@ -1037,6 +1014,10 @@
       <DependentUpon>201602201035489_Verboten phrase text is mandatory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\shoulditweet - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

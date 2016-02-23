@@ -1,7 +1,8 @@
 (function () {
     angular
         .module('app')
-        .controller('AdminController', AdminController);
+        .controller('AdminController', 
+        ['$state', '$scope', 'toastr', 'appService',AdminController]);
 
     /* @ngInject */
     function AdminController($state, $scope, toastr, appService) {

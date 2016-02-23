@@ -5,21 +5,13 @@
         </h2>
         <span class="h4">Use the below checker to verify if text is suitable to be posted to Twitter.</span>
     </div>
-
 </div>
-
-
 <div class="row top-buffer">
-
-    <div class="col-lg-12">
-        
-
+    <div class="col-lg-12"> 
         <div class="form-group">
             <div><label for="text">Text</label></div>
             <div>
-                <textarea placeholder="Tweet text goes here" rows=10 class="form-control input-lg" ng-model="vm.tweet.text"></textarea>
-
-                    <!--<div class="h4 text-danger">@Html.ValidationMessageFor(m => m.Text)</div>-->
+                <textarea placeholder="Tweet text goes here" rows="5" class="form-control input-lg" ng-model="vm.tweet.text"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -27,25 +19,16 @@
                 <span class="glyphicon glyphicon-send"></span>  Check Tweet
             </button>
         </div>
-
         <span class="alert-danger h3" ng-show="vm.generalError">{{vm.generalError}}</span>
-
-
         <div class="form-group" ng-show="vm.verbotenCheckPassed">
             <h3 class="text-success">Tweet text is safe, happy tweeting!</h3>
         </div>
-
         <div class="form-group" ng-show="!vm.verbotenCheckPassed && vm.violations.length > 0 ">
             <h3 class="text-danger">The tweet does contain problematic phrase(s)</h3>
             <h4>Violation(s):</h4>
             <ul class="h4">
-
                 <li ng-repeat="v in vm.violations">{{v}}</li>
             </ul>
-
         </div>
-        
-
     </div>
-
 </div>

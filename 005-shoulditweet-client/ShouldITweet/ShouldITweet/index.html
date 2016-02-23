@@ -3,14 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Should I Tweet ?></title>
-
-    
-	<!-- inject:css -->
-    <link rel="stylesheet" href="content/angular-busy.min.css">
-    <link rel="stylesheet" href="content/angular-toastr.min.css">
-    <link rel="stylesheet" href="content/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="content/bootstrap.min.css">
+    <title>Should I Tweet ?</title>    
+	<!-- inject:css -->    
+    <link rel="stylesheet" href="content/vendor.css">    
+    <link rel="stylesheet" href="content/app.css">    
     <!-- endinject -->
 	
 	
@@ -24,13 +20,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/#" class="navbar-brand">Should I tweet</a>
+                <a ui-sref="home"class="navbar-brand">Should I tweet</a>
                 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/#/home" class="navbar-brand">Home</a></li>
-                    <li><a href="/#/admin" class="navbar-brand">Admin</a></li>
+                    <li><a ui-sref="home" class="navbar-brand">Home</a></li>
+                    <li><a ui-sref="admin" class="navbar-brand">Admin</a></li>
                 </ul>
             </div>
         </div>
@@ -44,7 +40,7 @@
         
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Should I tweet</p>
+            <p>&copy; 2016 - Should I tweet</p>
         </footer>
     </div>
     
@@ -53,51 +49,10 @@
     
     
 	<!-- inject:js -->
-    <script src="vendor/jquery.min.js"></script>
-    <script src="vendor/angular.js"></script>
-    <script src="vendor/bootstrap.min.js"></script>
-    <script src="vendor/angular-busy.min.js"></script>
-    <script src="vendor/angular-sanitize.min.js"></script>
-    <script src="vendor/angular-toastr.min.js"></script>
-    <script src="vendor/angular-toastr.tpls.min.js"></script>
-    <script src="vendor/angular-ui-router.min.js"></script>
-    <script src="vendor/lodash.min.js"></script>
-    <script src="vendor/moment.min.js"></script>
-    <script src="app/admin/admin-edit.js"></script>
-    <script src="app/admin/admin.js"></script>
+    <script src="vendor/vendor.js"></script>
     <script src="app/app.js"></script>
-    <script src="app/Bootstrapper.js"></script>
-    <script src="app/config.routes.js"></script>
-    <script src="app/Home/home.js"></script>
-    <script src="app/services/appService.js"></script>
-    <script src="app/services/globalBusyService.js"></script>
-    <script src="app/services/httpBusyService.js"></script>
+    <script src="app/templates.js"></script>
     <!-- endinject -->
-
-    <!--
-
-
-
-
-
-
-    <script src="wwwroot/app/app.js"></script>
-
-
-    <script src="wwwroot/app/services/globalBusyService.js"></script>
-    <script src="wwwroot/app/services/httpBusyService.js"></script>
-    <script src="wwwroot/app/services/appService.js"></script>
-
-    <script src="wwwroot/app/Home/home.js"></script>
-
-    <script src="wwwroot/app/admin/admin.js"></script>
-
-    <script src="wwwroot/app/admin/admin-edit.js"></script>
-
-    -->
-
-
-
-<script type="text/javascript">document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
+    
 </body>
 </html>

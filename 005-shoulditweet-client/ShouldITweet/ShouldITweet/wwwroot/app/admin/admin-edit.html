@@ -1,15 +1,38 @@
-
 <h2>Create/Edit Verboten Phrase</h2>
 
 <p>
-    <a ui-sref="admin.edit">Back to list</a>
+    <a class="h4 navbar-link" ui-sref="admin">Back to list</a>
 </p>
 
 <div class="row top-buffer">
 
-    
+    <div class="col-lg-12">
+        <div class="form-group">
+            <div><label for="text">Text</label></div>
+            <div>
+                <input type="text" placeholder="Please fill phrase" 
+                       class="form-control input-lg" ng-model="vm.phrase.phrase" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div><label for="text">Last Modified</label></div>
+            <div>
+                {{vm.phrase.lastModified | date:'dd/MM/yyyy HH:mm:ss '}}
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success btn-success" ng-click="vm.savePhrase()">
+                <span class="glyphicon glyphicon-save"></span>  Save Phrase
+            </button>
+            <button ng-show="vm.phrase.id" class="btn btn-success btn-danger" ng-click="vm.deletePhrase()">
+                <span class="glyphicon glyphicon-remove"></span>  Delete Phrase
+            </button>
+        </div>
 
-   
+        <span class="alert-danger h3" ng-show="vm.generalError">{{vm.generalError}}</span>
+
+    </div>
+
 </div>
 
 
