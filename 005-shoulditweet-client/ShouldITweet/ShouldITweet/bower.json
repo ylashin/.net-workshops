@@ -1,0 +1,23 @@
+{
+  "name": "Should I Tweet",
+  "version": "0.0.1",
+  "authors": [
+    "Readify <yousry.moahmed@readify.net>"
+  ],
+  "description": "Should I Tweet App",
+  "keywords": [
+    "Should I Tweet"
+  ],
+  "license": "Property of Readify",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": { },
+  "dependencies": {
+    
+  }
+}

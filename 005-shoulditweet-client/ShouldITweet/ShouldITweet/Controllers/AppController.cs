@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 
 namespace ShouldITweetClient.Controllers
@@ -15,6 +16,8 @@ namespace ShouldITweetClient.Controllers
     {
         private IVerbotenChecker VerbotenChecker;
         private IRepository<VerbotenPhrase> Repository;
+
+        
         public AppController(IVerbotenChecker verbotenChecker, IRepository<VerbotenPhrase> repository)
         {
             VerbotenChecker = verbotenChecker;
@@ -34,6 +37,7 @@ namespace ShouldITweetClient.Controllers
 
         [HttpPost]
         [Route("api/app/tweet/check")]
+        [ValidateModel]
         public Tweet Post([FromBody]Tweet tweet)
         {
             if (tweet == null || string.IsNullOrWhiteSpace(tweet.Text))

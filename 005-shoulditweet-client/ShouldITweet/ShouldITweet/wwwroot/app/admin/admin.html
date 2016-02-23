@@ -1,0 +1,35 @@
+﻿
+<h2>Verboten Phrase List</h2>
+
+<p>
+    <a ui-sref="admin-edit">Create New</a>
+</p>
+
+<div class="row top-buffer">
+
+    <div class="table-responsive">
+        <table class="table h4">
+            <thead>
+                <tr>
+                    <td class="col-lg-6"><strong>Phrase</strong></td>
+                    <td class="col-lg-6"><strong>Last Modified</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in vm.phrases">
+                    <td>
+                        <a ui-sref="admin-edit({ phraseId: p.id})">{{p.phrase}}</a>
+                    </td>
+                    <td>
+                        {{p.lastModified | date:'dd/MM/yyyy HH:mm:ss '}}
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+   
+</div>
+
+
