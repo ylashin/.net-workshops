@@ -1,7 +1,7 @@
-var myapp = angular.module('app', ["ui.router", 'toastr', 'ngSanitize', 'cgBusy']);
+var app = angular.module('app', ["ui.router", 'toastr', 'ngSanitize', 'cgBusy']);
 
 
-myapp.value('cgBusyDefaults', {
+app.value('cgBusyDefaults', {
     message: 'please wait...',
     backdrop: true,
     delay: 300
@@ -9,8 +9,22 @@ myapp.value('cgBusyDefaults', {
     .constant('_', window._)
     .constant('moment', window.moment);
 
+app.run(function ($rootScope) {
+    jQuery(".navbar .container a").click(function () {
+        if (jQuery(".navbar-collapse").hasClass("in"))
+            jQuery("button.navbar-toggle").click();
+    });
+    
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        
+    });
+});
 
-myapp.config(function ($stateProvider, $urlRouterProvider) {
+
+
+
+
+app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise("/home");
 
@@ -33,7 +47,6 @@ myapp.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'AdminEditController',
         controllerAs: 'vm',
     });
-
 });
 
 
