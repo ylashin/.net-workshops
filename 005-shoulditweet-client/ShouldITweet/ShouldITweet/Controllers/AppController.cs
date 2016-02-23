@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using ShouldITweetClient.Data;
+using ShouldITweetClient.Filters;
 using ShouldITweetClient.Logic;
 using ShouldITweetClient.Models;
 using System;
