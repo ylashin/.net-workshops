@@ -1,15 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="app">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Should I Tweet ?></title>
 
-    <link href="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="wwwroot/lib/angular-busy/dist/angular-busy.min.css" rel="stylesheet" />
-    <link href="wwwroot/lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" />
     
+	<!-- inject:css -->
+    <link rel="stylesheet" href="content/angular-busy.min.css">
+    <link rel="stylesheet" href="content/angular-toastr.min.css">
+    <link rel="stylesheet" href="content/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="content/bootstrap.min.css">
+    <!-- endinject -->
+	
+	
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -44,23 +48,41 @@
         </footer>
     </div>
     
-    <script src="wwwroot/lib/moment/min/moment.min.js"></script>
-    <script src="wwwroot/lib/jquery/dist/jquery.min.js"></script>
-    <script src="wwwroot/lib/lodash/dist/lodash.min.js"></script>
-    <script src="wwwroot/lib/angular/angular.js"></script>
-    <script src="wwwroot/lib/angular-toastr/dist/angular-toastr.min.js"></script>
-    <script src="wwwroot/lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-    <script src="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!--<script src="wwwroot/lib/angular-animate/angular-animate.min.js"></script>-->
-    <script src="wwwroot/lib/angular-busy/dist/angular-busy.min.js"></script>
-    <script src="wwwroot/lib/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="wwwroot/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-
-
     
-    <script src="wwwroot/app/app.js"></script>    
-    <!--<script src="wwwroot/app/config.routes.js"></script>-->
+   
+    
+    
+	<!-- inject:js -->
+    <script src="vendor/jquery.min.js"></script>
+    <script src="vendor/angular.js"></script>
+    <script src="vendor/bootstrap.min.js"></script>
+    <script src="vendor/angular-busy.min.js"></script>
+    <script src="vendor/angular-sanitize.min.js"></script>
+    <script src="vendor/angular-toastr.min.js"></script>
+    <script src="vendor/angular-toastr.tpls.min.js"></script>
+    <script src="vendor/angular-ui-router.min.js"></script>
+    <script src="vendor/lodash.min.js"></script>
+    <script src="vendor/moment.min.js"></script>
+    <script src="app/admin/admin-edit.js"></script>
+    <script src="app/admin/admin.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/Bootstrapper.js"></script>
+    <script src="app/config.routes.js"></script>
+    <script src="app/Home/home.js"></script>
+    <script src="app/services/appService.js"></script>
+    <script src="app/services/globalBusyService.js"></script>
+    <script src="app/services/httpBusyService.js"></script>
+    <!-- endinject -->
+
+    <!--
+
+
+
+
+
+
+    <script src="wwwroot/app/app.js"></script>
+
 
     <script src="wwwroot/app/services/globalBusyService.js"></script>
     <script src="wwwroot/app/services/httpBusyService.js"></script>
@@ -72,6 +94,10 @@
 
     <script src="wwwroot/app/admin/admin-edit.js"></script>
 
+    -->
 
+
+
+<script type="text/javascript">document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script>
 </body>
 </html>

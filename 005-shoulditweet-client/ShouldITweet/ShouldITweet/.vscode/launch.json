@@ -1,0 +1,24 @@
+{
+    "version":"0.1.0",
+    "configurations" : 
+    [
+        {
+            "name" : "node gulp.js ..",
+            "type" : "node",
+            "program" : "./node_modules/gulp/bin/gulp.js",
+            "stopOnEntry" : true,
+            "args" : ["debug"],
+            "cwd" : ".",
+            "runtimeExecutable" : null,
+            "env" : {}            
+        },
+        {
+            "name" : "Attach",
+            "type" : "node",
+            "address" : "localhost",
+            "port" : "5858"
+            
+        }
+        
+    ]
+}
